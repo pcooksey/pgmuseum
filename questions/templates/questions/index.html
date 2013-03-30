@@ -1,11 +1,18 @@
-<h3>Please answers the following questions to allow us to generate a database for you.</h3>
+<h3>Please answer the following questions to allow us to generate a database for you.</h3>
 
 {% if questions %}
+<form action="submit/" method="post">
+{% csrf_token %}
   <ul>
     {% for question in questions %}
-      <li>{{ question.question }}</li>
+    <li>{{ question.question }} 
+      <input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
+      <input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
+    </li>
     {% endfor %}
   </ul>
+<input type="submit" value="Submit" />
+</form>
 {% else %}
   <h3>Sorry, we have not added any questions.</h3>
 {% endif %}
