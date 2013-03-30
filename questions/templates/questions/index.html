@@ -1,0 +1,11 @@
+<h3>Please answers the following questions to allow us to generate a database for you.</h3>
+
+{% if questions %}
+  <ul>
+    {% for question in questions %}
+      <li>{{ question.question }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h3>Sorry, we have not added any questions.</h3>
+{% endif %}
