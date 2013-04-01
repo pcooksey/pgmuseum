@@ -1,15 +1,20 @@
 <h3>Please answer the following questions to allow us to generate a database for you.</h3>
 
 {% if questions %}
-<form action="submit/" method="post">
+<form action="" method="post">
 {% csrf_token %}
   <ul>
     {% for question in questions %}
-    <li>{{ question.question }} 
-      <input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
-      <input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
-    </li>
+		{% if number = question.id %}
+			<li>{{ question.question }} 
+				<input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
+				<input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
+			</li>
+		{% else %}
+			<input type="hidden" name="{{ question.id }}" value="0" />
+		{% endif %}
     {% endfor %}
+	<input type="hidden" name="number" value="{{ number }}">
   </ul>
 <input type="submit" value="Submit" />
 </form>
