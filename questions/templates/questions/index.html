@@ -5,16 +5,20 @@
 {% csrf_token %}
   <ul>
     {% for question in questions %}
-		{% if number = question.id %}
-			<li>{{ question.question }} 
-				<input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
-				<input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
-			</li>
-		{% else %}
-			<input type="hidden" name="{{ question.id }}" value="0" />
-		{% endif %}
+		  {% if number == question.id %}
+        <li>{{ question.question }}
+        {% if radio %}
+				  <input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
+				  <input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
+        {% elif numberInput %}
+          <input type="number" name="{{ question.id }}" />
+        {% endif %}
+        </li>
+		  {% else %}
+			  <input type="hidden" name="{{ question.id }}" value="0" />
+		  {% endif %}
     {% endfor %}
-	<input type="hidden" name="number" value="{{ number }}">
+	  <input type="hidden" name="number" value="{{ number }}">
   </ul>
 <input type="submit" value="Submit" />
 </form>

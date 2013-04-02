@@ -12,5 +12,12 @@
 		"fields": {
 			"question": "Do you need to track data?"
 		}
-	}
+	},
+  {
+    "model": "questions.Question",
+    "pk": 3,
+    "fields": {
+      "question": "How many items do you need to track?"
+    }
+  }
 ]
