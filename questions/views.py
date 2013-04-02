@@ -5,6 +5,7 @@ from django import forms
 
 def index(request):
   questions = Question.objects.all()
+  
   # Does the first page of the questions
   if 'number' not in request.POST:
     context = { "questions": questions, "number": 1, "radio": True }
@@ -19,7 +20,7 @@ def index(request):
   if number == 1:
     if answer == 1:
       generateDonorDatabase()
-      return HttpResponse("Generate Donor Database")
+      return HttpResponse("Generating Donor Database")
     else:
       context = { "questions": questions, "number": 2, "radio": True }
       return render(request, "questions/index.html", context)
@@ -32,11 +33,12 @@ def index(request):
     numOfFields = int(request.POST[str(number)])
     context = { "number": 4, "numOfFields": range(numOfFields) }
     return render(request, "questions/index.html", context)
-  # Number 4 is generating the tracking database
-  elif number == 4:
-    generateTrackingDatabase()
 
   return HttpResponse("We do not have the database you need!")
+
+def inputs(request):
+  generateTrackingDatabase()
+  return HttpResponse("Generating Tracking Database")
 
 def generateDonorDatabase():
   return 0
