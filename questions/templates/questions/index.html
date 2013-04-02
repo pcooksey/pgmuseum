@@ -1,8 +1,8 @@
-<h3>Please answer the following questions to allow us to generate a database for you.</h3>
-
 {% if questions %}
-<form action="" method="post">
-{% csrf_token %}
+  <h3>Please answer the following questions to allow us to generate a database for you.</h3>
+
+  <form action="" method="post">
+  {% csrf_token %}
   <ul>
     {% for question in questions %}
 		  {% if number == question.id %}
@@ -20,8 +20,29 @@
     {% endfor %}
 	  <input type="hidden" name="number" value="{{ number }}">
   </ul>
-<input type="submit" value="Submit" />
-</form>
+  <input type="submit" value="Submit" />
+  </form>
+{% elif numOfFields %}
+  <h3>Please fill out each name and field type.</h3>
+  <form action="" method="post">
+  <ol>
+  {% for index in numOfFields %}
+    <li>
+      Name: <input type="text" name="text{{ index }}" />
+      Type:
+      <select>
+        <option value="Integer">Integer</option>
+        <option value="Real">Real</option>
+        <option value="Text">Text</option>
+        <option value="Blob">Blob</option>
+      </select>
+      <br />
+    </li>
+  {% endfor %}
+  </ol>
+  <input type="hidden" name="number" value="{{ number }}">
+  <input type="submit" value="Submit" />
+  </form>
 {% else %}
   <h3>Sorry, we have not added any questions.</h3>
 {% endif %}
