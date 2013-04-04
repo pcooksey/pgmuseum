@@ -1,0 +1,15 @@
+html {
+  background: #edeae1;
+}
+
+#container {
+  width: 800px;
+  margin: 0px auto;
+  padding: 25px 40px;
+  background: white;
+}
+
+#submit {
+  position: fixed;
+  right: 50%;
+}
