@@ -3,53 +3,47 @@
   <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
 </head>
 <body id="container">
-{% if questions %}
-  <h3>Please answer the following questions to allow us to generate a database for you.</h3>
-
-  <form action="" method="post">
+  <form action="{{ action }}" method="post">
   {% csrf_token %}
-  <ul>
-    {% for question in questions %}
-		  {% if number == question.id %}
-        <li>{{ question.question }}
-        {% if radio %}
-				  <input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
-				  <input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
-        {% elif numberInput %}
-          <input type="number" name="{{ question.id }}" min="1" max="20" />
-        {% endif %}
-        </li>
-		  {% else %}
-			  <input type="hidden" name="{{ question.id }}" value="0" />
-		  {% endif %}
+  {% if questions %}
+    <h3>Please answer the following questions to allow us to generate a database for you.</h3>
+    <ul>
+      {% for question in questions %}
+		    {% if number == question.id %}
+          <li>{{ question.question }}
+          {% if radio %}
+				    <input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
+				    <input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
+          {% elif numberInput %}
+            <input type="number" name="{{ question.id }}" min="1" max="20" />
+          {% endif %}
+          </li>
+		    {% else %}
+			    <input type="hidden" name="{{ question.id }}" value="0" />
+		    {% endif %}
+      {% endfor %}
+    </ul>
+  {% elif numOfFields %}
+    <h3>Please fill out each name and field type.</h3>
+    <ol>
+      {% for index in numOfFields %}
+      <li>
+        Name: <input type="text" name="text{{ index }}" />
+        Type:
+        <select>
+          <option value="Integer">Integer</option>
+          <option value="Real">Real</option>
+          <option value="Text">Text</option>
+          <option value="Blob">Blob</option>
+        </select>
+        <br />
+      </li>
     {% endfor %}
-	  <input type="hidden" name="number" value="{{ number }}" />
-  </ul>
-  <input id="submit" type="submit" value="Submit" />
-  </form>
-{% elif numOfFields %}
-  <h3>Please fill out each name and field type.</h3>
-  <form action="inputs/" method="post">
-  {% csrf_token %}
-  <ol>
-  {% for index in numOfFields %}
-    <li>
-      Name: <input type="text" name="text{{ index }}" />
-      Type:
-      <select>
-        <option value="Integer">Integer</option>
-        <option value="Real">Real</option>
-        <option value="Text">Text</option>
-        <option value="Blob">Blob</option>
-      </select>
-      <br />
-    </li>
-  {% endfor %}
-  </ol>
+    </ol>
+  {% else %}
+    <h3>Sorry, we have not added any questions.</h3>
+  {% endif %}
   <input type="hidden" name="number" value="{{ number }}" />
   <input id="submit" type="submit" value="Submit" />
   </form>
-{% else %}
-  <h3>Sorry, we have not added any questions.</h3>
-{% endif %}
 </body>

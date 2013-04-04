@@ -22,16 +22,16 @@ def index(request):
       generateDonorDatabase()
       return HttpResponse("Generating Donor Database")
     else:
-      context = { "questions": questions, "number": 2, "radio": True }
+      context = { "action": "", "questions": questions, "number": 2, "radio": True }
       return render(request, "questions/index.html", context)
   # Number 2 is the tracking data database
   elif number == 2 and answer == 1:
-    context = { "questions": questions, "number": 3, "numberInput": True }
+    context = { "action": "", "questions": questions, "number": 3, "numberInput": True }
     return render(request, "questions/index.html", context)
   # Number 3 is getting the number of items in the database
   elif number == 3:
     numOfFields = int(request.POST[str(number)])
-    context = { "number": 4, "numOfFields": range(numOfFields) }
+    context = { "action": "inputs/", "number": 4, "numOfFields": range(numOfFields) }
     return render(request, "questions/index.html", context)
 
   return HttpResponse("We do not have the database you need!")
