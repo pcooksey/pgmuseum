@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="loginContainer">
-    <form class="form-signin">
+    <form class="form-signin" action="" method="post">
       {% csrf_token %}
       <h3 class="form-signin-heading">Please sign in</h3>
       <input type="email" class="input-block-level" placeholder="Email address">

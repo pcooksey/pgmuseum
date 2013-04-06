@@ -6,13 +6,18 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="loginContainer">
-    <form class="form-signin">
+    <form autocomplete="off" class="form-signin" action="" method="post">
       {% csrf_token %}
       <h3 class="form-signin-heading">Please register</h3>
-      <input type="email" class="input-block-level" placeholder="Email address">
-      <input type="password" class="input-block-level" placeholder="Password"> 
-      <input type="password" class="input-block-level" placeholder="Confirm password">
-      <button class="btn btn-primary" name="register" type="submit">Register</button>
+      <input id="email" type="email" class="input-block-level" name="email" placeholder="Email address">
+      <input type="password" class="input-block-level" name="password" placeholder="Password"> 
+      <input type="password" class="input-block-level" name="confirmPassword" placeholder="Confirm password">
+      <input type="text" class="input-block-level" name="firstName" placeholder="First name">
+      <input type="text" class="input-block-level" name="lastName" placeholder="Last name">
+      <button class="btn btn-primary" name="createAccount" type="submit">Register</button>
+      {% if error %}
+        <span class="label label-important">{{ error }}</span>
+      {% endif %}
     </form>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static "bootstrap.min.js" %}"></script>
