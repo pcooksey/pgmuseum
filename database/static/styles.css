@@ -9,6 +9,13 @@ html {
   background: white;
 }
 
+#loginContainer {
+  width: 400px;
+  margin: 5% auto 0 auto;
+  padding: 25px 40px;
+  background: white;
+}
+
 #submit {
   position: fixed;
   right: 50%;

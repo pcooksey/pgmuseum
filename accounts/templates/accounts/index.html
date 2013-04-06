@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  {% load staticfiles %}
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
+  </head>
+  <body id="loginContainer">
+    <form class="form-signin">
+      {% csrf_token %}
+      <h3 class="form-signin-heading">Please sign in</h3>
+      <input type="text" class="input-block-level" placeholder="Email address">
+      <input type="password" class="input-block-level" placeholder="Password"> 
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+      <button class="btn btn-primary" name="signin" type="submit">Sign in</button>
+      <button class="btn btn-primary" name="register" type="submit">Register</button>
+    </form>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static "bootstrap.min.js" %}"></script>
+  </body>
+</html>
