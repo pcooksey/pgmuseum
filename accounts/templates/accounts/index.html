@@ -6,14 +6,17 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="loginContainer">
-    <form class="form-signin" action="" method="post">
+    <form autocomplete="off" class="form-signin" action="" method="post">
       {% csrf_token %}
       <h3 class="form-signin-heading">Please sign in</h3>
-      <input type="email" class="input-block-level" placeholder="Email address">
-      <input type="password" class="input-block-level" placeholder="Password"> 
+      <input type="email" class="input-block-level" name="email" placeholder="Email address">
+      <input type="password" class="input-block-level" name="password" placeholder="Password"> 
       <label class="checkbox">
         <input type="checkbox" value="remember-me"> Remember me
       </label>
+      {% if error %}
+        <span class="label label-important">{{ error }}</span><br />
+      {% endif %}
       <button class="btn btn-primary" name="signin" type="submit">Sign in</button>
       <button class="btn btn-primary" name="register" type="submit">Register</button>
     </form>

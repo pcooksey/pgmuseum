@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 def index(request):
   context = {}
@@ -10,7 +11,19 @@ def index(request):
   if "register" in request.POST:
     return redirect("/accounts/register/")
   elif "signin" in request.POST:
-    return HttpResponse("login")
+    email = request.POST["email"]
+    password = request.POST["password"]
+    user = authenticate(username = email, password = password)
+
+    if user is not None:
+      if user.is_active:
+        login(request, user)
+        return redirect("/questions/")
+      else:
+        return render(request, "accounts/index.html", { "error": "Your account is disabled!" })
+    else:
+       return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
+
   else:
     return render(request, "accounts/index.html", context)
 
