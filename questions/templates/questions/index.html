@@ -1,5 +1,6 @@
 {% load staticfiles %}
 <head>
+  <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
   <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
 </head>
 <body id="container">
@@ -7,15 +8,15 @@
   {% csrf_token %}
   {% if questions %}
     <h3>Please answer the following questions to allow us to generate a database for you.</h3>
-    <ul>
+    <ul class="unstyled">
       {% for question in questions %}
 		    {% if number == question.id %}
-          <li>{{ question.question }}
+          <li>{{ question.question }}<br />
           {% if radio %}
-				    <input type="radio" name="{{ question.id }}" id="choiceYes" value="1" />Yes
-				    <input type="radio" name="{{ question.id }}" id="choiceNo" value="0" checked />No
+            <input id="radio" type="radio" name="{{ question.id }}" value="1">&nbsp;Yes
+            <input id="radio" type="radio" name="{{ question.id }}" value="0" checked>&nbsp;No
           {% elif numberInput %}
-            <input type="number" name="{{ question.id }}" min="1" max="20" />
+            <input id="inputField" type="number" name="{{ question.id }}" min="1" max="20" />
           {% endif %}
           </li>
 		    {% else %}
@@ -28,7 +29,7 @@
     <ol>
       {% for index in numOfFields %}
       <li>
-        Name: <input type="text" name="text{{ index }}" />
+        Name: <input id="inputField" type="text" name="text{{ index }}" />
         Type:
         <select>
           <option value="Integer">Integer</option>
@@ -44,6 +45,8 @@
     <h3>Sorry, we have not added any questions.</h3>
   {% endif %}
   <input type="hidden" name="number" value="{{ number }}" />
-  <input id="submit" type="submit" value="Submit" />
+  <button class="btn btn-primary" type="submit">Submit</button>
   </form>
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="{% static "bootstrap.min.js" %}"></script>
 </body>
