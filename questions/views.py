@@ -13,11 +13,9 @@ def index(request):
   else:
     number = int(request.POST['number'])
   
-  # Getting the value for the answer 
-  answer = int(request.POST[str(number)])
-  
   # Number 1 is the first question for Donor Database
-  if number == 1:
+  if number == 1: 
+    answer = int(request.POST[str(number)])
     if answer == 1:
       generateDonorDatabase()
       return HttpResponse("Generating Donor Database")
@@ -25,11 +23,18 @@ def index(request):
       context = { "action": "", "questions": questions, "number": 2, "radio": True }
       return render(request, "questions/index.html", context)
   # Number 2 is the tracking data database
-  elif number == 2 and answer == 1:
-    context = { "action": "", "questions": questions, "number": 3, "numberInput": True }
-    return render(request, "questions/index.html", context)
+  elif number == 2:
+    answer = int(request.POST[str(number)])
+
+    if answer == 1:
+      context = { "action": "", "questions": questions, "number": 3, "numberInput": True }
+      return render(request, "questions/index.html", context)
   # Number 3 is getting the number of items in the database
   elif number == 3:
+    if len(request.POST[str(number)]) == 0:
+      context =  { "action": "", "questions": questions, "number": 3, "numberInput": True, "error": "You must have at least 1 item!" }
+      return render(request, "questions/index.html", context)
+    
     numOfFields = int(request.POST[str(number)])
     context = { "action": "inputs/", "number": 4, "numOfFields": range(numOfFields) }
     return render(request, "questions/index.html", context)

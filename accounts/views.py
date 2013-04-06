@@ -15,8 +15,6 @@ def index(request):
     return render(request, "accounts/index.html", context)
 
 def register(request):
-  context = {}
-
   if "createAccount" in request.POST:
     email = request.POST["email"]
     password = request.POST["password"]
@@ -42,9 +40,9 @@ def register(request):
     else:
       return errorMessage(request, "Please enter information in every field!")
   else:
-    return render(request, "accounts/register.html", context)
+    return render(request, "accounts/register.html", {})
 
 def errorMessage(request, error):
-  context = {"error": error}
+  context = { "error": error }
 
   return render(request, "accounts/register.html", context)
