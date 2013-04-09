@@ -10,20 +10,22 @@ def index(request):
   
   if "register" in request.POST:
     return redirect("/accounts/register/")
-  elif "signin" in request.POST and "email" in request.POST and "password" in request.POST:
-    email = request.POST["email"]
-    password = request.POST["password"]
-    user = authenticate(username = email, password = password)
+  elif "signin" in request.POST:
+	if "email" in request.POST and "password" in request.POST:
+		email = request.POST["email"]
+		password = request.POST["password"]
+		user = authenticate(username = email, password = password)
 
-    if user is not None:
-      if user.is_active:
-        login(request, user)
-        return redirect("/questions/")
-      else:
-        return render(request, "accounts/index.html", { "error": "Your account is disabled!" })
-    else:
-       return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
-
+		if user is not None:
+		  if user.is_active:
+			login(request, user)
+			return redirect("/questions/")
+		  else:
+			return render(request, "accounts/index.html", { "error": "Your account is disabled!" })
+		else:
+		   return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
+	else:
+		return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
   else:
     return render(request, "accounts/index.html", context)
 
