@@ -15,8 +15,10 @@
         <span id="errorMessage" class="label label-important">{{ error }}</span><br />
       {% endif %}
       <button class="btn btn-primary" name="signin" type="submit">Sign in</button>
-      <button class="btn btn-primary" name="register" type="submit">Register</button>
     </form>
+	<form class="form-signin" action="" method="post">
+	  <button class="btn btn-primary" name="register" type="submit">Register</button>
+	</form>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static "bootstrap.min.js" %}"></script>
   </body>
