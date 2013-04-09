@@ -17,3 +17,9 @@ urlpatterns = patterns('',
     url(r"^questions/", include("questions.urls")),
     url(r"^accounts/", include("accounts.urls")),
 )
+
+# Serve static files when debug false
+if not settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )
