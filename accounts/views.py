@@ -10,7 +10,7 @@ def index(request):
   
   if "register" in request.POST:
     return redirect("/accounts/register/")
-  elif "signin" in request.POST:
+  elif "signin" in request.POST and "email" in request.POST and "password" in request.POST:
     email = request.POST["email"]
     password = request.POST["password"]
     user = authenticate(username = email, password = password)
@@ -29,11 +29,12 @@ def index(request):
 
 def register(request):
   if "createAccount" in request.POST:
-    email = request.POST["email"]
-    password = request.POST["password"]
-    confirmPassword = request.POST["confirmPassword"]
-    firstName = request.POST["firstName"]
-    lastName = request.POST["lastName"]
+	#Below should be refractored into a function to decrease code
+    email = request.POST["email"] if "email" in request.POST else ""
+    password = request.POST["password"] if "password" in request.POST else ""
+    confirmPassword = request.POST["confirmPassword"] if "confirmPassword" in request.POST else ""
+    firstName = request.POST["firstName"] if "firstName" in request.POST else ""
+    lastName = request.POST["lastName"] if "lastName" in request.POST else ""
 
     if email and password and firstName and lastName and password == confirmPassword:
       object, created = User.objects.get_or_create(username = email)
