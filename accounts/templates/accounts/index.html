@@ -20,6 +20,7 @@
       <button class="btn btn-primary" name="signin" type="submit">Sign in</button>
     </form>
 	<form class="form-signin" action="" method="post">
+	  {% csrf_token %}
 	  <button class="btn btn-primary" name="register" type="submit">Register</button>
 	</form>
     <script src="http://code.jquery.com/jquery.js"></script>
