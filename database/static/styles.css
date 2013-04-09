@@ -29,3 +29,7 @@ html {
   height: 30px;
   margin-top: 10px;
 }
+
+#errorMessage {
+  margin-bottom: 10px;
+}
