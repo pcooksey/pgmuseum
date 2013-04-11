@@ -16,9 +16,9 @@
       {% endif %}
       <button class="btn btn-primary" name="signin" type="submit">Sign in</button>
     </form>
-	<form class="form-signin" action="" method="post">
+	<form class="form-signin" action="" method="post" style="margin:0px;height:0px">
 	  {% csrf_token %}
-	  <button class="btn btn-primary" name="register" type="submit">Register</button>
+	  <button class="btn btn-primary" name="register" type="submit" style="position:relative;top:-50px;left:80px;">Register</button>
 	</form>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static "bootstrap.min.js" %}"></script>
