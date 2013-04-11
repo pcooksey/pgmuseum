@@ -33,9 +33,3 @@ html {
 #errorMessage {
   margin-bottom: 10px;
 }
-
-#registerButton {
-  position: relative;
-  left: 80px;
-  top: -50px;
-}

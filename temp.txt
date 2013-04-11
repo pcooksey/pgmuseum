@@ -1,0 +1,6 @@
+tree 0b5e803d1c6928f56ffba0231ed9612bff220fdc
+parent 0185f9c86a99e104f0d437f4d25849a04e8f41cf
+author root <codyhansen92@gmail.com> 1363044947 -0500
+committer root <codyhansen92@gmail.com> 1363044947 -0500
+
+Edited the readme
