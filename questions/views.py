@@ -18,8 +18,7 @@ def index(request):
     if number == 1: 
       answer = int(request.POST[str(number)])
       if answer == 1:
-        generateDonorDatabase()
-        return HttpResponse("Generating Donor Database")
+        return generateDonorDatabase()
       else:
         context = { "action": "", "questions": questions, "number": 2, "radio": True }
         return render(request, "questions/index.html", context)
@@ -49,7 +48,7 @@ def inputs(request):
   return HttpResponse("Generating Tracking Database")
 
 def generateDonorDatabase():
-  return 0
+  return redirect("/donor/")
 
 def generateTrackingDatabase():
   return 0
