@@ -7,6 +7,16 @@
   </head>
   <body id="container">
     <h3>Donor Database</h3>
+    <form autocomplete="off" method="POST" action="createNewDonor/">
+      {% csrf_token %}
+      <table>
+        {{ DonorForm.as_table }}
+      </table>
+      <button class="btn btn-primary" name="addDonor" type="submit">Add Donor</button>
+      {% if error %}
+        <span id="errorMessage" class="label label-important">{{ error }}</span><br />
+      {% endif %}
+    </form>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -21,20 +31,16 @@
             <td>{{ item.firstName }}</td>
             <td>{{ item.lastName }}</td>
             <td>{{ item.email }}</td>
+            <td>
+              <form method="POST" action="deleteDonor/" style="margin-bottom:0px">
+                {% csrf_token %}
+                <button class="btn" name="deleteDonor" value="{{ item.id }}" type="submit"><i class="icon-trash"></i></button>
+              </form>
+            </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
-    <form autocomplete="off" method="POST" action="createNewDonor/">
-      {% csrf_token %}
-      <table>
-        {{ DonorForm.as_table }}
-      </table>
-      <button class="btn btn-primary" name="addDonor" type="submit">Add Donor</button>
-      {% if error %}
-        <span id="errorMessage" class="label label-important">{{ error }}</span><br />
-      {% endif %}
-    </form>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static "bootstrap.min.js" %}"></script>
   </body>

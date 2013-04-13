@@ -38,3 +38,14 @@ def createNewDonor(request):
       return redirect("/donor/")
   else:
     return redirect("/accounts/")
+
+def deleteDonor(request):
+  if request.user.is_authenticated():
+    donor = Donor.objects.get(id = request.POST["deleteDonor"])
+
+    if donor.createdBy == request.user:
+      donor.delete()
+ 
+    return redirect("/donor/")
+  else:
+    return redirect("/accounts/")
