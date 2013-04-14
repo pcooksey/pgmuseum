@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  {% load staticfiles %}
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
+  </head>
+  <body id="container">
+    <h3>Donor Database</h3>
+    <form autocomplete="off" method="POST" action="createNewDonor/">
+      {% csrf_token %}
+      <table>
+        {{ DonorForm.as_table }}
+      </table>
+      <button class="btn btn-primary" name="addDonor" type="submit">Add Donor</button>
+      {% if error %}
+        <span id="errorMessage" class="label label-important">{{ error }}</span><br />
+      {% endif %}
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in donors %}
+          <tr>
+            <td>
+              <form method="POST" action="donations/" style="margin-bottom:0px">
+                {% csrf_token %}
+                <button class="btn" name="donor" value="{{ item.id }}" title="View Donations" type="submit">{{ item.firstName }}</button>
+              </form>
+            </td>
+            <td>{{ item.lastName }}</td>
+            <td>{{ item.email }}</td>
+            <td>
+              <form method="POST" action="deleteDonor/" style="margin-bottom:0px">
+                {% csrf_token %}
+                <button class="btn" name="deleteDonor" value="{{ item.id }}" title="Delete Donor" type="submit"><i class="icon-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static "bootstrap.min.js" %}"></script>
+  </body>
+</html>
