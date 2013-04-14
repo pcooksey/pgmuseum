@@ -3,4 +3,4 @@ from django.test.client import Client
 
 class SimpleTest(TestCase):
   def setUp(self):
-    print "test"
+    self.client = Client()
