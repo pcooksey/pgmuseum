@@ -9,3 +9,4 @@ class DonorForm(forms.ModelForm):
 class DonationForm(forms.ModelForm):
   class Meta:
     model = Donation
+    exclude = ("donor",)

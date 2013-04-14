@@ -28,13 +28,19 @@
       <tbody>
         {% for item in donors %}
           <tr>
+            <td>
+              <form method="POST" action="donations/" style="margin-bottom:0px">
+                {% csrf_token %}
+                <button class="btn" name="donor" value="{{ item.id }}" title="View Donations" type="submit">{{ item.firstName }}</button>
+              </form>
+            </td>
             <td>{{ item.firstName }}</td>
             <td>{{ item.lastName }}</td>
             <td>{{ item.email }}</td>
             <td>
               <form method="POST" action="deleteDonor/" style="margin-bottom:0px">
                 {% csrf_token %}
-                <button class="btn" name="deleteDonor" value="{{ item.id }}" type="submit"><i class="icon-trash"></i></button>
+                <button class="btn" name="deleteDonor" value="{{ item.id }}" title="Delete Donor" type="submit"><i class="icon-trash"></i></button>
               </form>
             </td>
           </tr>

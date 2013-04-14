@@ -49,3 +49,26 @@ def deleteDonor(request):
     return redirect("/donor/")
   else:
     return redirect("/accounts/")
+
+def donations(request):
+  if request.user.is_authenticated():
+    donor = Donor.objects.get(id = request.POST["donor"])
+    query_results = Donation.objects.all().filter(donor = donor)
+
+    donationForm = DonationForm()
+
+    context = { "donations": query_results, "DonationForm": donationForm, "DonorId": request.POST["donor"] }
+
+    if "error" in request.session:
+      context["error"] = request.session["error"]
+      del request.session["error"]
+
+    return render(request, "donor/donations.html", context)
+  else:
+    return redirect("/accounts/")
+
+def createNewDonation(request):
+  return HttpResponse("create donation")
+
+def deleteDonation(request):
+  return HttpResponse("delete donation")
