@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.shortcuts import redirect
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -11,29 +10,33 @@ def index(request):
   if "register" in request.POST:
     return redirect("/accounts/register/")
   elif "signin" in request.POST:
-    email = request.POST["email"]
-    password = request.POST["password"]
-    user = authenticate(username = email, password = password)
+    if "email" in request.POST and "password" in request.POST:
+      email = request.POST["email"]
+      password = request.POST["password"]
+      user = authenticate(username = email, password = password)
 
-    if user is not None:
-      if user.is_active:
-        login(request, user)
-        return redirect("/questions/")
+      if user is not None:
+        if user.is_active:
+          login(request, user)
+
+          return redirect("/questions/")
+        else:
+          return render(request, "accounts/index.html", { "error": "Your account is disabled!" })
       else:
-        return render(request, "accounts/index.html", { "error": "Your account is disabled!" })
+        return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
     else:
-       return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
-
+      return render(request, "accounts/index.html", { "error": "Incorrect username or password!" })
   else:
     return render(request, "accounts/index.html", context)
 
 def register(request):
   if "createAccount" in request.POST:
-    email = request.POST["email"]
-    password = request.POST["password"]
-    confirmPassword = request.POST["confirmPassword"]
-    firstName = request.POST["firstName"]
-    lastName = request.POST["lastName"]
+  #Below should be refractored into a function to decrease code
+    email = verifyPost(request, "email")
+    password = verifyPost(request, "password")
+    confirmPassword = verifyPost(request, "confirmPassword")
+    firstName = verifyPost(request, "firstName")
+    lastName = verifyPost(request, "lastName")
 
     if email and password and firstName and lastName and password == confirmPassword:
       object, created = User.objects.get_or_create(username = email)
@@ -59,3 +62,9 @@ def errorMessage(request, error):
   context = { "error": error }
 
   return render(request, "accounts/register.html", context)
+
+def verifyPost(request, string):
+  if string in request.POST:
+    return request.POST[string]
+
+  return ""
