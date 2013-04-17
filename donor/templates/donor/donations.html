@@ -6,13 +6,14 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="container">
-    <h3>Donations Database</h3>
+    <h3>{{firstName}} {{lastName}} Donations Database</h3>
     <form autocomplete="off" method="POST" action="createNewDonation/">
       {% csrf_token %}
       <table>
         {{ DonationForm.as_table }}
       </table>
       <button class="btn btn-primary" name="addDonation" type="submit">Add Donation</button>
+	  <input type="hidden" name="donor" value="{{DonorId}}" />
       {% if error %}
         <span id="errorMessage" class="label label-important">{{ error }}</span><br />
       {% endif %}
