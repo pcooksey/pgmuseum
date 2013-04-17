@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="container">
+	<ul class="pager">
+		<li class="previous"><a href="/donor/">Back</a></li>
+	</ul>
     <h3>{{firstName}} {{lastName}} Donations Database</h3>
     <form autocomplete="off" method="POST" action="createNewDonation/">
       {% csrf_token %}
