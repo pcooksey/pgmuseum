@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="container">
-    <h3>Donations Database</h3>
+    <h3>{{firstName}} {{lastName}} Donations Database</h3>
     <form autocomplete="off" method="POST" action="createNewDonation/">
       {% csrf_token %}
       <table>

@@ -51,26 +51,50 @@ def deleteDonor(request):
     return redirect("/accounts/")
 
 def donations(request):
-  if request.user.is_authenticated() and "donor" in request.POST:
-    donor = Donor.objects.get(id = request.POST["donor"])
+  if request.user.is_authenticated():
+    if "donor" in request.POST:
+	  request.session["donor"] = request.POST["donor"]
+    elif "donor" not in request.session:
+	  return redirect("/donor/")
+	  
+    donor = Donor.objects.get(id = request.session["donor"])
     query_results = Donation.objects.all().filter(donor = donor)
 
     donationForm = DonationForm()
 
-    context = { "donations": query_results, "DonationForm": donationForm, "DonorId": request.POST["donor"] }
+    context = { "donations": query_results, "DonationForm": donationForm, "DonorId": request.session["donor"], "firstName": donor.firstName, "lastName": donor.lastName }
 
     if "error" in request.session:
       context["error"] = request.session["error"]
       del request.session["error"]
 
     return render(request, "donor/donations.html", context)
-  elif "donor" not in request.POST:
-    return redirect("/donor/")
   else:
     return redirect("/accounts/")
 
 def createNewDonation(request):
-  return HttpResponse("create donation")
+  if request.user.is_authenticated():
+    donationForm = DonationForm(request.POST)
+
+    if donationForm.is_valid():
+      obj = donationForm.save(commit = False)
+      obj.donor = Donor.objects.get(id = request.session["donor"])
+      obj.save()
+
+      return redirect("/donor/donations/")
+    else:
+      request.session["error"] = "Your input was invalid"
+      return redirect("/donor/donations")
+  else:
+    return redirect("/accounts/")
 
 def deleteDonation(request):
-  return HttpResponse("delete donation")
+  if request.user.is_authenticated():
+    donation = Donation.objects.get(id = request.POST["deleteDonation"])
+
+    if donation.donor == Donor.objects.get(id = request.session["donor"]):
+      donation.delete()
+ 
+    return redirect("/donor/donations/")
+  else:
+    return redirect("/accounts/")
