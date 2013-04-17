@@ -51,7 +51,7 @@ def deleteDonor(request):
     return redirect("/accounts/")
 
 def donations(request):
-  if request.user.is_authenticated():
+  if request.user.is_authenticated() and "donor" in request.POST:
     donor = Donor.objects.get(id = request.POST["donor"])
     query_results = Donation.objects.all().filter(donor = donor)
 
@@ -64,6 +64,8 @@ def donations(request):
       del request.session["error"]
 
     return render(request, "donor/donations.html", context)
+  elif "donor" not in request.POST:
+    return redirect("/donor/")
   else:
     return redirect("/accounts/")
 

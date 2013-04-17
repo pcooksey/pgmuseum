@@ -13,6 +13,7 @@
         {{ DonationForm.as_table }}
       </table>
       <button class="btn btn-primary" name="addDonation" type="submit">Add Donation</button>
+	  <input type="hidden" name="donor" value="{{DonorId}}" />
       {% if error %}
         <span id="errorMessage" class="label label-important">{{ error }}</span><br />
       {% endif %}
