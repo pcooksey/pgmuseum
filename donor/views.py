@@ -98,3 +98,17 @@ def deleteDonation(request):
     return redirect("/donor/donations/")
   else:
     return redirect("/accounts/")
+
+def viewAllDonations(request):
+  if request.user.is_authenticated():
+    query_results = Donation.objects.all().filter(donor__createdBy = request.user)
+	
+    context = { "donations": query_results, "firstName": "All", "lastName": "" }
+
+    if "error" in request.session:
+      context["error"] = request.session["error"]
+      del request.session["error"]
+
+    return render(request, "donor/donations.html", context)
+  else:
+    return redirect("/accounts/")

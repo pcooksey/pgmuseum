@@ -17,6 +17,10 @@
         <span id="errorMessage" class="label label-important">{{ error }}</span><br />
       {% endif %}
     </form>
+	<form autocomplete="off" method="POST" action="donations/viewall/">
+      {% csrf_token %}
+      <button class="btn btn-primary" name="viewAllDonations" type="submit">View All Donations</button>
+    </form>
     <table class="table table-striped">
       <thead>
         <tr>

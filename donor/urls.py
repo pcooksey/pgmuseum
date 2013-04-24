@@ -8,4 +8,5 @@ urlpatterns = patterns("",
   url(r"^donations/$", views.donations, name="donations"),
   url(r"^donations/createNewDonation/$", views.createNewDonation, name="createNewDonation"),
   url(r"^donations/deleteDonation/$", views.deleteDonation, name="deleteDonation"),
+  url(r"^donations/viewall/$", views.viewAllDonations, name="viewall"),
 )
