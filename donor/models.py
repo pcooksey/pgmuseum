@@ -6,7 +6,7 @@ class Donor(models.Model):
   createdBy = models.ForeignKey(User)
   firstName = models.CharField(max_length = 20)
   lastName = models.CharField(max_length = 20)
-  email = models.EmailField() 
+  email = models.EmailField(unique = True) 
 
 class Donation(models.Model):
   id = models.AutoField(primary_key = True)
