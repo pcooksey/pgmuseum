@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from donor.models import Donor, Donation
 
 def index(request):
   context = {}
+
+  if request.user.is_authenticated():
+    return redirect("home/")
   
   if "register" in request.POST:
     return redirect("/accounts/register/")
@@ -17,9 +21,8 @@ def index(request):
 
       if user is not None:
         if user.is_active:
-          login(request, user)
-
-          return redirect("/questions/")
+		  login(request, user)
+		  return redirect("home/")
         else:
           return render(request, "accounts/index.html", { "error": "Your account is disabled!" })
       else:
@@ -68,3 +71,17 @@ def verifyPost(request, string):
     return request.POST[string]
 
   return ""
+
+def logoutPage(request):
+  logout(request)
+
+  return redirect("/accounts/")
+
+def home(request):
+  if request.user.is_authenticated():
+    query_results = Donor.objects.all().filter(createdBy = request.user)
+    if not query_results:
+	  return redirect("/questions/")
+    return render(request, "accounts/home.html", {"user": request.user, "donor": True,})
+  else:
+    return redirect("/accounts/")
