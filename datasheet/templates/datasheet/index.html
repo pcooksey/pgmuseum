@@ -12,6 +12,18 @@
       <table>
         {{ BasicForm.as_table }}
       </table>
+	  <table>
+        {{ ExplorationForm.as_table }}
+      </table>
+	  <table>
+        {{ ObservedForm.as_table }}
+      </table>
+	  <table>
+        {{ WeatherForm.as_table }}
+      </table>
+	  <table>
+        {{ CountForm.as_table }}
+      </table>
       <button class="btn btn-primary" name="addDonor" type="submit">Submit</button>
       {% if error %}
         <span id="errorMessage" class="label label-important">{{ error }}</span><br />
