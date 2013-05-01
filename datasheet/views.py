@@ -10,8 +10,7 @@ def index(request):
   if request.user.is_authenticated():
     
     #query_results = Donor.objects.all().filter(createdBy = request.user)
-
-    basicForm = BasicForm()
+	basicForm = BasicForm()
 	explorationForm = ExplorationForm()
 	observedForm = ObservedForm()
 	weatherForm = WeatherForm()
