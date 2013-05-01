@@ -7,27 +7,20 @@ from datasheet.forms import *
 from datasheet.models import *
 
 def index(request):
-  if request.user.is_authenticated():
+	if request.user.is_authenticated():
     
-    #query_results = Donor.objects.all().filter(createdBy = request.user)
-	basicForm = BasicForm()
-	explorationForm = ExplorationForm()
-	observedForm = ObservedForm()
-	weatherForm = WeatherForm()
-	countForm = CountForm()
+		#query_results = Donor.objects.all().filter(createdBy = request.user)
+		basicForm = BasicForm()
+		explorationForm = ExplorationForm()
+		observedForm = ObservedForm()
+		weatherForm = WeatherForm()
+		countForm = CountForm()
+		context = {"BasicForm": basicForm,"ExplorationForm":explorationForm,"ObservedForm":observedForm,"weatherForm":weatherForm,"countForm":countForm, }
+	
+		if "error" in request.session:
+			context["error"] = request.session["error"]
+			del request.session["error"]
 
-    context = {
-	  "BasicForm": basicForm, 
-	  "ExplorationForm":explorationForm, 
-	  "ObservedForm":observedForm,
-	  "weatherForm":weatherForm,
-	  "countForm":countForm,
-	}
-
-    if "error" in request.session:
-      context["error"] = request.session["error"]
-      del request.session["error"]
-
-    return render(request, "datasheet/index.html", context)
-  else:
-    return redirect("/accounts/")
+		return render(request, "datasheet/index.html", context)
+	else:
+		return redirect("/accounts/")
