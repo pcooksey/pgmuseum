@@ -3,8 +3,9 @@ from datasheet.models import *
 
 class BasicForm(forms.ModelForm):
   class Meta:
-    model = Basic
-    exclude = ("createdBy",)
+	model = Basic
+	exclude = ("createdBy","exploration_time","butterflies_observed","weather","count_time")
+	
 
 class ClusterForm(forms.ModelForm):
   class Meta:

@@ -5,6 +5,9 @@ class SiteName(models.Model):
   Code = models.CharField(max_length=2)
   site_name = models.CharField(max_length=50)
   
+  def __unicode__(self):
+    return self.site_name
+  
 class ExplorationTime(models.Model):
   start = models.TimeField()
   end = models.TimeField()
@@ -40,12 +43,12 @@ class Weather(models.Model):
 	('rain','rain'),
 	('downpour','downpour'),
   )
-
-  sky_percentage = models.IntegerField()
+  
+  skypercentage = models.IntegerField()
   BFT = models.IntegerField(max_length=1,choices=Beaufort_Scale_For_Sky, default=0)
   precip = models.CharField(max_length=10,choices=PRECIP, default='none')
   wind = models.IntegerField()
-  wind_direction = models.TextField()
+  winddirection = models.CharField(max_length=20)
   temp = models.IntegerField()
 
 class Basic(models.Model):
@@ -54,13 +57,14 @@ class Basic(models.Model):
   date = models.DateField()
   site_name = models.ForeignKey(SiteName)
   number_of_observers = models.IntegerField()
-  observers = models.TextField()
+  observers = models.CharField(max_length=100)
   exploration_time = models.OneToOneField(ExplorationTime)
   butterflies_observed = models.OneToOneField(Observed)
   weather = models.OneToOneField(Weather)
   count_time = models.OneToOneField(CountTime)
   
 class ClusterInfo(models.Model):
+  id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
   number_Clustered = models.IntegerField()
   number_tagged = models.IntegerField()

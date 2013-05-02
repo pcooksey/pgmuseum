@@ -10,21 +10,43 @@
     <form autocomplete="off" method="POST" action="">
       {% csrf_token %}
       <table>
-        {{ BasicForm.as_table }}
+        <tr><td>Date(mm/dd/yyyy):{{BasicForm.date.errors}} {{BasicForm.date}}</td> <td>Site Name: {{BasicForm.site_name}}</td></tr>
+		<tr><td># Observers: {{BasicForm.number_of_observers}}</td> <td>Observers: {{BasicForm.observers}}</td></tr>
       </table>
 	  <table>
-        {{ ExplorationForm.as_table }}
+		<tr><h5>Exploration Time:</h5></tr>
+		<tr>
+			<td>Start: </br> {{ExplorationForm.start}}</td>
+			<td>End: </br>{{ExplorationForm.end}}</td>
+		</tr>
+		<tr>
+			<td>Total (min): </br> {{ExplorationForm.total}}</td>
+        </tr>
+      </table>
+	  <table class="table table-bordered">
+		<thead><tr><th colspan="2"><h5>Butterflies observed during exploration (Enter Number)</h5></th></tr></thead>
+		<tr><td>Loners: {{ObservedForm.loners}}</td><td>Grounders: {{ObservedForm.grounders}}</td></tr>
+		<tr><td>Sunners: {{ObservedForm.sunners}}</td><td>Dead: <br/>{{ObservedForm.dead}}</td></tr>
+		<tr><td>Fliers: </br> {{ObservedForm.fliers}}</td><td>Mating: <br/>{{ObservedForm.mating}}</td></tr>
+		<tr><td colspan="2">Total outside of cluster:  {{ObservedForm.total}}</td></tr>
+      </table>
+	  <table class="table table-bordered">
+		<thead><tr><th colspan="2"><h5>Weather</h5></th></tr></thead>
+		<tr><td>Sky %: </br>{{WeatherForm.skypercentage}}</td><td>bft: {{WeatherForm.BFT}}</td></tr>
+		<tr><td>Precip: </br> {{WeatherForm.precip}}</td><td>Wind: <br/>{{WeatherForm.wind}}</td></tr>
+		<tr><td>Wind Direction: {{WeatherForm.winddirection}}</td><td>Temp (&deg;C): <br/>{{WeatherForm.temp}}</td></tr>
       </table>
 	  <table>
-        {{ ObservedForm.as_table }}
+        <tr><h5>Count Time:</h5></tr>
+		<tr>
+			<td>Start: </br> {{CountForm.start}}</td>
+			<td>End: </br> {{CountForm.end}}</td>
+		</tr>
+		<tr>
+			<td>Total (min):</br> {{CountForm.total}}</td>
+        </tr>
       </table>
-	  <table>
-        {{ WeatherForm.as_table }}
-      </table>
-	  <table>
-        {{ CountForm.as_table }}
-      </table>
-      <button class="btn btn-primary" name="addDonor" type="submit">Submit</button>
+      <button class="btn btn-primary" name="addDonor" type="submit">Next</button>
       {% if error %}
         <span id="errorMessage" class="label label-important">{{ error }}</span><br />
       {% endif %}
