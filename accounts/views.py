@@ -79,9 +79,6 @@ def logoutPage(request):
 
 def home(request):
   if request.user.is_authenticated():
-    query_results = Donor.objects.all().filter(createdBy = request.user)
-    if not query_results:
-	  return redirect("/questions/")
-    return render(request, "accounts/home.html", {"user": request.user, "donor": True,})
+    return render(request, "accounts/home.html", {"user": request.user,})
   else:
     return redirect("/accounts/")

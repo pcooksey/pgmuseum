@@ -7,13 +7,10 @@
   </head>
   <body id="loginContainer">
 	<h2> Hello, {{ user }} </h2>
-	{% if donor %}
-	<form class="form-signin" action="/donor/" method="post">
+	<form class="form-signin" action="/datasheet/" method="post">
 	  {% csrf_token %}
-	  Access your
-	  <button class="btn btn-primary" name="donor" type="submit" >Donor Database</button>
+	  <button class="btn btn-primary" name="donor" type="submit" >Add to Database</button>
 	</form>
-	{% endif %}
 	<form class="form-signin" action="../logout/" method="post">
 	  {% csrf_token %}
 	  <button class="btn btn-primary" name="logout" type="submit" >logout</button>
