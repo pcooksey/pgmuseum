@@ -7,7 +7,7 @@
   </head>
   <body id="loginContainer">
 	<h2> Hello, {{ user }} </h2>
-	<form class="form-signin" action="/datasheet/" method="post">
+	<form class="form-signin" action="/datasheet/">
 	  {% csrf_token %}
 	  <button class="btn btn-primary" name="donor" type="submit" >Add to Database</button>
 	</form>
