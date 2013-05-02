@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  {% load staticfiles %}
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
+  </head>
+  <body id="container">
+	<ul class="pager">
+		<li class="previous"><a href="/datasheet/">Back</a></li>
+	</ul>
+    <h3>Cluster Information</h3>
+	{% if ClusterForm %}
+      <form autocomplete="off" method="POST" action="">
+        {% csrf_token %}
+        <table>
+			<tr><td>Monarchs Clustered:</td><td>{{ClusterForm.number_Clustered}}</td></tr>
+			<tr><td>Tagged in Cluster:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
+			<tr><td>Tree Species:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
+			<tr><td>Number of Trees:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
+			<tr><td>Cluster Aspect:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
+			<tr><td>Cluster Height:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
+        </table>
+        <button class="btn btn-primary" name="add" type="submit">Add</button>
+        {% if error %}
+          <span id="errorMessage" class="label label-important">{{ error }}</span><br />
+        {% endif %}
+      </form>
+	{% endif %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Monarch Clustered</th>
+          <th>Tagged in Cluster</th>
+		  <th>Tree Species </th>
+		  <th>Number of Trees</th>
+		  <th>Cluster Aspect (degrees)</th>
+		  <th>Cluster Height (meters)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in clusters %}
+          <tr>
+            <td>{{ item.number_Clustered }}</td>
+            <td>{{ item.number_tagged }}</td>
+            <td>{{ item.tree_species }}</td>
+			<td>{{ item.number_of_trees }}</td>
+			<td>{{ item.aspect }}%</td>
+			<td>{{ item.height }}m</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static "bootstrap.min.js" %}"></script>
+  </body>
+</html>
