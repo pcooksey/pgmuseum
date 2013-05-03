@@ -7,4 +7,4 @@ This is our database in a box project for CST-438.  This project is written with
 </ol>
 
 Also, we're using <code>Python 2.7.3</code> and <code>Django 1.5</code>
-The project is also running on Heroku at <code>http://database-in-a-box.herokuapp.com</code>
+The project is also running on Heroku at <code>http://pgmuseum.herokuapp.com</code>
