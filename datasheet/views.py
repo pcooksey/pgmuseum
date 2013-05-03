@@ -9,7 +9,7 @@ from datasheet.models import *
 
 def index(request):
 	if request.user.is_authenticated():
-		if request.method == 'POST':
+		if request.method == 'POST' and 'new' not in request.POST:
 			basicForm = BasicForm(request.POST)
 			explorationForm = ExplorationForm(request.POST)
 			observedForm = ObservedForm(request.POST)
@@ -65,4 +65,4 @@ def next(request):
 			context = {'clusters':clusters,'ClusterForm': clusterForm,}
 			return render(request, "datasheet/next.html", context)		
 	else:
-		return HttpResponse("Didn't have id")
+		return redirect('/accounts/')
