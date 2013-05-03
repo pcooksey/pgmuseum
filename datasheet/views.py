@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.core.exceptions import ObjectDoesNotExist
 from datasheet.forms import *
 from datasheet.models import *
 
@@ -43,24 +44,25 @@ def index(request):
 		return redirect("/accounts/")
 		
 def next(request):
-	if request.method == 'GET' and 'id' in request.GET:
+	if request.user.is_authenticated() and 'id' in request.GET:
 		id = request.GET['id']
-		basic = Basic.objects.get(createdBy = request.user, id=id)
-		clusters = ClusterInfo.objects.all().filter(basic = basic)
-		clusterForm = ClusterForm()
-		context = {'clusters':clusters,'ClusterForm': clusterForm,}
-		return render(request, "datasheet/next.html", context)
-	elif request.method == 'POST' and 'id' in request.GET:
-		id = request.GET['id']
-		basic = Basic.objects.get(createdBy = request.user, id=id)
-		clusters = ClusterInfo.objects.all().filter(basic = basic)
-		clusterForm = ClusterForm(request.POST)
-		if clusterForm.is_valid():
-			cluster = clusterForm.save(commit = False)
-			cluster.basic = basic
-			cluster.save()
+		try:
+			basic = Basic.objects.get(createdBy = request.user, id=id)
+			clusters = ClusterInfo.objects.all().filter(basic = basic)
+		except ObjectDoesNotExist:
+			return redirect('/datasheet/')
+		if request.method == 'GET':
 			clusterForm = ClusterForm()
-		context = {'clusters':clusters,'ClusterForm': clusterForm,}
-		return render(request, "datasheet/next.html", context)		
+			context = {'clusters':clusters,'ClusterForm': clusterForm,}
+			return render(request, "datasheet/next.html", context)
+		elif request.method == 'POST':
+			clusterForm = ClusterForm(request.POST)
+			if clusterForm.is_valid():
+				cluster = clusterForm.save(commit = False)
+				cluster.basic = basic
+				cluster.save()
+				clusterForm = ClusterForm()
+			context = {'clusters':clusters,'ClusterForm': clusterForm,}
+			return render(request, "datasheet/next.html", context)		
 	else:
 		return HttpResponse("Didn't have id")

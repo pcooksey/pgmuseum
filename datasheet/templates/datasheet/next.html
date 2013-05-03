@@ -14,12 +14,48 @@
       <form autocomplete="off" method="POST" action="">
         {% csrf_token %}
         <table>
-			<tr><td>Monarchs Clustered:</td><td>{{ClusterForm.number_Clustered}}</td></tr>
-			<tr><td>Tagged in Cluster:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
-			<tr><td>Tree Species:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
-			<tr><td>Number of Trees:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
-			<tr><td>Cluster Aspect:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
-			<tr><td>Cluster Height:</td><td> {{ClusterForm.number_Clustered}}</td></tr>
+			<tr><td>Monarchs Clustered:</td>
+				<td>{{ClusterForm.number_Clustered}}
+				{% if ClusterForm.number_Clustered.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.number_Clustered.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
+			<tr><td>Tagged in Cluster:</td>
+				<td> {{ClusterForm.number_tagged}}
+				{% if ClusterForm.number_tagged.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.number_tagged.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
+			<tr><td>Tree Species:</td>
+				<td> {{ClusterForm.tree_species}}
+				{% if ClusterForm.tree_species.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.tree_species.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
+			<tr><td>Number of Trees:</td>
+				<td> {{ClusterForm.number_of_trees}}
+				{% if ClusterForm.number_of_trees.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.number_of_trees.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
+			<tr><td>Cluster Aspect:</td>
+				<td> {{ClusterForm.aspect}}
+				{% if ClusterForm.aspect.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.aspect.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
+			<tr><td>Cluster Height:</td>
+				<td> {{ClusterForm.height}}
+				{% if ClusterForm.height.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.height.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
         </table>
         <button class="btn btn-primary" name="add" type="submit">Add</button>
         {% if error %}
@@ -52,6 +88,12 @@
       </tbody>
     </table>
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{% static "bootstrap.min.js" %}"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+	<script src="{% static 'bootstrap-tooltip.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("[data-toggle='tooltip']").tooltip();
+		});
+	</script>
   </body>
 </html>

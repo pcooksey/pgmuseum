@@ -7,6 +7,13 @@ class SiteName(models.Model):
   
   def __unicode__(self):
     return self.site_name
+
+class TreeSpecies(models.Model):
+  Code = models.CharField(max_length=5)
+  tree_name = models.CharField(max_length=100)
+  
+  def __unicode__(self):
+    return self.tree_name
   
 class ExplorationTime(models.Model):
   start = models.TimeField()
@@ -68,7 +75,7 @@ class ClusterInfo(models.Model):
   basic = models.ForeignKey(Basic)
   number_Clustered = models.IntegerField()
   number_tagged = models.IntegerField()
-  tree_species = models.CharField(max_length=4)
+  tree_species = models.ForeignKey(TreeSpecies)
   number_of_trees = models.IntegerField()
   aspect = models.IntegerField()
   height = models.IntegerField()

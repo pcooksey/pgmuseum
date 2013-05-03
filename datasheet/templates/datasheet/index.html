@@ -2,48 +2,157 @@
 <html>
   {% load staticfiles %}
   <head>
-    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
   </head>
   <body id="container">
     <h3>Data Sheet</h3>
     <form autocomplete="off" method="POST" action="">
       {% csrf_token %}
-      <table>
-        <tr><td>Date(mm/dd/yyyy):{{BasicForm.date.errors}} {{BasicForm.date}}</td> <td>Site Name: {{BasicForm.site_name}}</td></tr>
-		<tr><td># Observers: {{BasicForm.number_of_observers}}</td> <td>Observers: {{BasicForm.observers}}</td></tr>
+      <table class="table table-bordered">
+        <tr><td>Date(mm/dd/yyyy):
+				{% if BasicForm.date.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{BasicForm.date.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{BasicForm.date}}</td> 
+			<td>Site Name: 
+				{% if BasicForm.site_name.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{BasicForm.site_name.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{BasicForm.site_name}}</td>
+		</tr>
+		<tr><td># Observers: 
+				{% if BasicForm.number_of_observers.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{BasicForm.number_of_observers.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{BasicForm.number_of_observers}}</td> 
+			<td>Observers: 
+				{% if BasicForm.observers.errors %}
+						<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{BasicForm.observers.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{BasicForm.observers}}</td>
+		</tr>
       </table>
-	  <table>
-		<tr><h5>Exploration Time:</h5></tr>
+	  <table class="table table-bordered">
+		<thead><tr><th><h5>Exploration Time:</h5></th></tr></thead>
 		<tr>
-			<td>Start: </br> {{ExplorationForm.start}}</td>
-			<td>End: </br>{{ExplorationForm.end}}</td>
+			<td>Start: 
+				{% if ExplorationForm.start.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.start.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{ExplorationForm.start}}</td>
+			<td>End: 
+				{% if ExplorationForm.end.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.end.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{ExplorationForm.end}}</td>
 		</tr>
 		<tr>
-			<td>Total (min): </br> {{ExplorationForm.total}}</td>
+			<td>Total (min): 
+			{% if ExplorationForm.total.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.total.errors.as_text}}'>Error</a> 
+			{% endif %}
+			</br> {{ExplorationForm.total}}</td>
         </tr>
       </table>
 	  <table class="table table-bordered">
-		<thead><tr><th colspan="2"><h5>Butterflies observed during exploration (Enter Number)</h5></th></tr></thead>
-		<tr><td>Loners: {{ObservedForm.loners}}</td><td>Grounders: {{ObservedForm.grounders}}</td></tr>
-		<tr><td>Sunners: {{ObservedForm.sunners}}</td><td>Dead: <br/>{{ObservedForm.dead}}</td></tr>
-		<tr><td>Fliers: </br> {{ObservedForm.fliers}}</td><td>Mating: <br/>{{ObservedForm.mating}}</td></tr>
-		<tr><td colspan="2">Total outside of cluster:  {{ObservedForm.total}}</td></tr>
+		<thead><tr><th colspan="2"><h5>Butterflies observed during exploration (Enter #)</h5></th></tr></thead>
+		<tr><td>Loners: 
+				{% if ObservedForm.loners.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.loners.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{ObservedForm.loners}}</td>
+			<td>Grounders: 
+				{% if ObservedForm.grounders.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.grounders.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{ObservedForm.grounders}}</td>
+		</tr>
+		<tr><td>Sunners: 
+				{% if ObservedForm.sunners.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.sunners.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{ObservedForm.sunners}}</td>
+			<td>Dead: 
+				{% if ObservedForm.dead.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.dead.errors.as_text}}'>Error</a> 
+				{% endif %}
+				<br/>{{ObservedForm.dead}}</td>
+		</tr>
+		<tr><td>Fliers: 
+				{% if ObservedForm.fliers.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.fliers.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{ObservedForm.fliers}}</td>
+			<td>Mating:
+				{% if ObservedForm.mating.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.mating.errors.as_text}}'>Error</a> 
+				{% endif %}
+				<br/>{{ObservedForm.mating}}</td>
+		</tr>
+		<tr><td colspan="2">Total outside of cluster:  
+				{% if ObservedForm.total.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.total.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{ObservedForm.total}}</td>
+		</tr>
       </table>
 	  <table class="table table-bordered">
 		<thead><tr><th colspan="2"><h5>Weather</h5></th></tr></thead>
-		<tr><td>Sky %: </br>{{WeatherForm.skypercentage}}</td><td>bft: {{WeatherForm.BFT}}</td></tr>
-		<tr><td>Precip: </br> {{WeatherForm.precip}}</td><td>Wind: <br/>{{WeatherForm.wind}}</td></tr>
-		<tr><td>Wind Direction: {{WeatherForm.winddirection}}</td><td>Temp (&deg;C): <br/>{{WeatherForm.temp}}</td></tr>
+		<tr><td>Sky %: 
+				{% if WeatherForm.skypercentage.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.skypercentage.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br>{{WeatherForm.skypercentage}}</td>
+			<td>bft: 
+				{% if WeatherForm.bft.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.bft.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{WeatherForm.BFT}}</td>
+		</tr>
+		<tr><td>Precip: 
+				{% if WeatherForm.precip.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.precip.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{WeatherForm.precip}}</td>
+			<td>Wind: 
+				{% if WeatherForm.wind.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.wind.errors.as_text}}'>Error</a> 
+				{% endif %}
+				<br/>{{WeatherForm.wind}}</td>
+		</tr>
+		<tr><td>Wind Direction: 
+				{% if WeatherForm.winddirection.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.winddirection.errors.as_text}}'>Error</a> 
+				{% endif %}
+				{{WeatherForm.winddirection}}</td>
+			<td>Temp (&deg;C):
+				{% if WeatherForm.temp.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.temp.errors.as_text}}'>Error</a> 
+				{% endif %}
+				<br/>{{WeatherForm.temp}}</td>
+		</tr>
       </table>
-	  <table>
-        <tr><h5>Count Time:</h5></tr>
+	  <table class="table table-bordered">
+        <thead><tr><th><h5>Count Time:</h5></th></tr></thead>
 		<tr>
-			<td>Start: </br> {{CountForm.start}}</td>
-			<td>End: </br> {{CountForm.end}}</td>
+			<td>Start: 
+				{% if CountForm.start.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.start.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{CountForm.start}}</td>
+			<td>End: 
+				{% if CountForm.end.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.end.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{CountForm.end}}</td>
 		</tr>
 		<tr>
-			<td>Total (min):</br> {{CountForm.total}}</td>
+			<td>Total (min):
+				{% if CountForm.total.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.total.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{CountForm.total}}</td>
         </tr>
       </table>
       <button class="btn btn-primary" name="addDonor" type="submit">Next</button>
@@ -53,6 +162,12 @@
     </form>
     </table>
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{% static "bootstrap.min.js" %}"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+	<script src="{% static 'bootstrap-tooltip.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("[data-toggle='tooltip']").tooltip();
+		});
+	</script>
   </body>
 </html>
