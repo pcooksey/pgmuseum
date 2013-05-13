@@ -43,7 +43,7 @@ def register(request):
 		lastName = verifyPost(request, "lastName")
 		accessCode = verifyPost(request, "accessCode")
 		try:
-			code = AccessCode.objects.get(code = accessCode)
+			code = AccessCode.objects.get(Code = accessCode)
 		except ObjectDoesNotExist:
 			return errorMessage(request, "Invalid access code")
 
