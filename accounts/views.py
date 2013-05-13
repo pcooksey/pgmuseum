@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from donor.models import Donor, Donation
 from accounts.models import AccessCode
-from django.core.exceptions import DoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
   context = {}
@@ -48,7 +48,7 @@ def register(request):
 				code = AccessCode.objects.get(Code = accessCode)
 			else:
 				return errorMessage(request, "Empty access code")
-		except DoesNotExist:
+		except ObjectDoesNotExist:
 			return errorMessage(request, "Invalid access code")
 
 		if email and password and firstName and lastName and password == confirmPassword:
