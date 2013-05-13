@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from donor.models import Donor, Donation
+from donor.models import AccessCode
 
 def index(request):
   context = {}
@@ -34,12 +35,17 @@ def index(request):
 
 def register(request):
   if "createAccount" in request.POST:
-  #Below should be refractored into a function to decrease code
-    email = verifyPost(request, "email")
-    password = verifyPost(request, "password")
-    confirmPassword = verifyPost(request, "confirmPassword")
-    firstName = verifyPost(request, "firstName")
-    lastName = verifyPost(request, "lastName")
+	#Below should be refractored into a function to decrease code
+	email = verifyPost(request, "email")
+	password = verifyPost(request, "password")
+	confirmPassword = verifyPost(request, "confirmPassword")
+	firstName = verifyPost(request, "firstName")
+	lastName = verifyPost(request, "lastName")
+	accessCode = verifyPost(request, "accessCode")
+	try:
+		code = AccessCode.objects.get(code = accessCode)
+	except ObjectDoesNotExist:
+		return errorMessage(request, "Invalid access code")
 
     if email and password and firstName and lastName and password == confirmPassword:
       object, created = User.objects.get_or_create(username = email)
