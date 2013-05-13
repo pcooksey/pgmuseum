@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from donor.models import Donor, Donation
 from accounts.models import AccessCode
+from django.core.exceptions import DoesNotExist
 
 def index(request):
   context = {}
