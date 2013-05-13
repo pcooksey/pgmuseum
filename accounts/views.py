@@ -44,7 +44,7 @@ def register(request):
 		accessCode = verifyPost(request, "accessCode")
 		try:
 			code = AccessCode.objects.get(Code = accessCode)
-		except ObjectDoesNotExist:
+		except DoesNotExist:
 			return errorMessage(request, "Invalid access code")
 
 		if email and password and firstName and lastName and password == confirmPassword:
