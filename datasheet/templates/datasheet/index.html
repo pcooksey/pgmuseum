@@ -48,7 +48,7 @@
 				</br> {{ExplorationForm.end}}</td>
 		</tr>
 		<tr>
-			<td>Total (min): 
+			<td colspan="2">Total (min): 
 			{% if ExplorationForm.total.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.total.errors.as_text}}'>Error</a> 
 			{% endif %}
@@ -148,11 +148,45 @@
 				</br> {{CountForm.end}}</td>
 		</tr>
 		<tr>
-			<td>Total (min):
+			<td colspan="2">Total (min):
 				{% if CountForm.total.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.total.errors.as_text}}'>Error</a> 
 				{% endif %}
 				</br> {{CountForm.total}}</td>
+        </tr>
+      </table>
+	  <table class="table table-bordered">
+        <thead><tr><th><h5>Notes:</h5></th></tr></thead>
+		<tr>
+			<td>Water Sources: 
+				{% if NotesForm.waterSource.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{NotesForm.waterSource.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{NotesForm.waterSource}}</td>
+			<td>Notes
+				{% if NotesForm.waterNotes.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{NotesForm.waterNotes.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br>{{NotesForm.waterNotes}}</td>
+		</tr>
+		<tr>
+			<td>Nectar Sources: 
+				{% if NotesForm.nectarSource.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{NotesForm.nectarSource.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{NotesForm.nectarSource}}</td>
+			<td>Notes
+				{% if NotesForm.nectarNotes.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{NotesForm.nectarNotes.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br>{{NotesForm.nectarNotes}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Additional Notes:
+				{% if NotesForm.additionalNotes.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.additionalNotes.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</br> {{NotesForm.additionalNotes}}</td>
         </tr>
       </table>
       <button class="btn btn-primary" name="addDonor" type="submit">Next</button>

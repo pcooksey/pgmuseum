@@ -6,9 +6,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
   <body id="container">
-	<ul class="pager">
-		<li class="previous"><a href="/datasheet/">Back</a></li>
-	</ul>
     <h3>Cluster Information</h3>
 	{% if ClusterForm %}
       <form autocomplete="off" method="POST" action="">
@@ -87,6 +84,15 @@
         {% endfor %}
       </tbody>
     </table>
+	{% if Flowers %}
+		<ul class="pager">
+			<li class="previous"><a href="?id={{ request.GET.id }}&done=true&flower=true">Finish</a></li>
+		</ul>
+	{% else %}
+		<ul class="pager">
+			<li class="previous"><a href="/datasheet/">Finish</a></li>
+		</ul>
+	{% endif %}
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static 'bootstrap.min.js' %}"></script>
 	<script src="{% static 'bootstrap-tooltip.js' %}"></script>

@@ -4,7 +4,7 @@ from datasheet.models import *
 class BasicForm(forms.ModelForm):
   class Meta:
 	model = Basic
-	exclude = ("createdBy","exploration_time","butterflies_observed","weather","count_time")
+	exclude = ("createdBy","exploration_time","butterflies_observed","weather","count_time", "notes")
 	
 
 class ClusterForm(forms.ModelForm):
@@ -31,3 +31,12 @@ class ObservedForm(forms.ModelForm):
 class ExplorationForm(forms.ModelForm):
   class Meta:
     model = ExplorationTime
+
+class NotesForm(forms.ModelForm):
+  class Meta:
+    model = Notes
+	
+class FlowerForm(forms.ModelForm):
+  class Meta:
+    model = Flowers
+    exclude = ("basic",)

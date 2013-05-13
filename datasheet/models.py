@@ -57,7 +57,18 @@ class Weather(models.Model):
   wind = models.IntegerField()
   winddirection = models.CharField(max_length=20)
   temp = models.IntegerField()
-
+  
+class Notes(models.Model):
+  ANSWER = (
+    ('No','No'),
+	('Yes','Yes'),
+  )
+  waterSource = models.CharField(max_length=3, choices=ANSWER, default='No')
+  waterNotes = models.CharField(max_length=150)
+  nectarSource = models.CharField(max_length=3, choices=ANSWER, default='No')
+  nectarNotes = models.CharField(max_length=150)
+  additionalNotes = models.CharField(max_length=250)
+  
 class Basic(models.Model):
   id = models.AutoField(primary_key = True)
   createdBy = models.ForeignKey(User)
@@ -69,6 +80,7 @@ class Basic(models.Model):
   butterflies_observed = models.OneToOneField(Observed)
   weather = models.OneToOneField(Weather)
   count_time = models.OneToOneField(CountTime)
+  notes = models.OneToOneField(Notes)
   
 class ClusterInfo(models.Model):
   id = models.AutoField(primary_key = True)
@@ -79,3 +91,25 @@ class ClusterInfo(models.Model):
   number_of_trees = models.IntegerField()
   aspect = models.IntegerField()
   height = models.IntegerField()
+  
+class Flowers(models.Model):
+  id = models.AutoField(primary_key = True)
+  basic = models.ForeignKey(Basic)
+  butterfly_bush_purple = models.IntegerField()
+  monarchs_eating_butterfly_bush_purple = models.IntegerField()
+  butterfly_bush_yellow = models.IntegerField()
+  monarchs_eating_butterfly_bush_yellow = models.IntegerField()
+  chaste_tree= models.IntegerField()
+  monarchs_eating_chaste_tree= models.IntegerField()
+  daisy_tree = models.IntegerField()
+  monarchs_eating_daisy_tree = models.IntegerField()
+  mallow_pink = models.IntegerField()
+  monarchs_eating_mallow_pink = models.IntegerField()
+  mallow_purple = models.IntegerField()
+  monarchs_eating_mallow_purple = models.IntegerField()
+  goldenrod = models.IntegerField()
+  monarchs_eating_goldenrod = models.IntegerField()
+  yellow_daisy = models.IntegerField()
+  monarchs_eating_yellow_daisy = models.IntegerField()
+  bottlebrush_red = models.IntegerField()
+  monarchs_eating_bottlebrush_red = models.IntegerField()
