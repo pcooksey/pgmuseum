@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  {% load staticfiles %}
+  <head>
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
+  </head>
+  <body>
+		{% if flowers %}
+			<table class="table table-striped">
+				<tr><th>Flower</th><th>Flower Bed#</th><th># of Monarchs Eating</th>
+				<tr><td>Butterfly Bush (Purple)</td><td>{{flowers.butterfly_bush_purple}}</td><td>{{flowers.monarchs_eating_butterfly_bush_purple}}</td></tr>
+				<tr><td>Butterfly Bush (Yellow)</td><td>{{flowers.butterfly_bush_yellow}}</td><td>{{flowers.monarchs_eating_butterfly_bush_yellow}}</td></tr>
+				<tr><td>Chaste Tree</td><td>{{flowers.chaste_tree}}</td><td>{{flowers.monarchs_eating_chaste_tree}}</td></tr>
+				<tr><td>Daisy Tree</td><td>{{flowers.daisy_tree}}</td><td>{{flowers.monarchs_eating_daisy_tree}}</td></tr>
+				<tr><td>Mallow (Pink/Red)</td><td>{{flowers.mallow_pink}}</td><td>{{flowers.monarchs_eating_mallow_pink}}</td></tr>
+				<tr><td>Mallow (Purple/Lavendar)</td><td>{{flowers.mallow_purple}}</td><td>{{flowers.monarchs_eating_mallow_purple}}</td></tr>
+				<tr><td>Goldenrod</td><td>{{flowers.goldenrod}}</td><td>{{flowers.monarchs_eating_goldenrod}}</td></tr>
+				<tr><td>Yellow Daisy</td><td>{{flowers.yellow_daisy}}</td><td>{{flowers.monarchs_eating_yellow_daisy}}</td></tr>
+				<tr><td>Bottlebrush (red)</td><td>{{flowers.bottlebrush_red}}</td><td>{{flowers.monarchs_eating_bottlebrush_red}}</td></tr>
+			</table>
+		{% endif %}
+		{% if clusters %}
+			<table class="table table-striped">
+				<tr><th># Monarches Clustered</th><th># Tagged</th><th>Tree Species</th><th>Aspect</th><th>Height</th>
+				{% for cluster in clusters %}
+					<tr>
+						<td>{{cluster.number_Clustered}}</td>
+						<td>{{cluster.number_tagged}}</td>
+						<td>{{cluster.tree_species}} ({{cluster.number_of_trees}})</td>
+						<td>{{cluster.aspect}}</td>
+						<td>{{cluster.height}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+  </body>
+</html>
