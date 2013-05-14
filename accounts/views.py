@@ -90,10 +90,32 @@ def logoutPage(request):
   return redirect("/accounts/")
 
 def home(request):
-  if request.user.is_authenticated():
-    return render(request, "accounts/home.html", {"user": request.user,})
-  else:
-    return redirect("/accounts/")
+	if request.user.is_authenticated():
+		basics = Basic.objects.all().filter(createdBy = request.user)
+		return render(request, "accounts/home.html", {"user": request.user, "basics":basics,})
+	else:
+		return redirect("/accounts/")
+		
+def extraInformation(request):
+	if request.user.is_authenticated():
+		if "id" in request.GET:
+			clusters = ()
+			flowers = ()
+			try:
+				basic = Basic.objects.get(id = request.GET["id"], createdBy = request.user)
+				clusters = ClusterInfo.objects.all().filter(basic = basic)
+			except ObjectDoesNotExist:
+				return HttpResponse("Does not exist")
+			if basic.site_name.Code == "PG":
+				try:
+					flowers = Flowers.objects.get(basic=basic)
+				except ObjectDoesNotExist:
+					flowers = ()
+			return render(request, "accounts/extra.html", {"clusters": clusters, "flowers": flowers,})
+		else:
+			return HttpResponse("No ID for data collection")
+	else:
+		return redirect("/accounts/")
 	
 def export(request):
 	if request.user.is_authenticated():

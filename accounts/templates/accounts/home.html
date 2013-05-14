@@ -16,12 +16,74 @@
 		  <button class="btn btn-primary" name="new" type="submit" >Add to Database</button>
 		  <input type="button" class="btn btn-primary" value="Export" onclick="location.href='export/';">
 		</form>
+		<div class="accordion" id="accordion2">
+		{% if basics %}
+			{% for basic in basics %}
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
+					{{basic.site_name}} ( {{basic.date}} )
+					</a>
+				</div>
+				<div id="collapse{{forloop.counter}}" class="accordion-body collapse in">
+					<div class="accordion-inner">
+					<table class="table table-striped">
+						<tr><td colspan="3">Observers: {{basic.observers}}</td></tr>
+						<tr><td>Exploration Time: </td><td>{{basic.exploration_time.start}} to {{basic.exploration_time.end}}</td><td> Min({{basic.exploration_time.total}})</td></tr>
+						<tr><td>Loner: {{basic.butterflies_observed.loners}}</td><td>Sunners: {{basic.butterflies_observed.sunners}}</td><td></td></tr>
+						<tr><td>Fliers: {{basic.butterflies_observed.fliers}}</td><td>Grounders: {{basic.butterflies_observed.grounders}}</td><td></td></tr>
+						<tr><td>Dead: {{basic.butterflies_observed.dead}}</td><td>Mating: {{basic.butterflies_observed.mating}}</td><td></td></tr>
+						<tr><td colspan="3">Total: {{basic.butterflies_observed.total}}</td></tr>
+						<tr><td>Sky Percentage: {{basic.weather.skypercentage}}</td><td>BFT: {{basic.weather.BFT}}</td><td></td></tr>
+						<tr><td>Precip: {{basic.weather.precip}}</td><td>Wind: {{basic.weather.wind}}</td><td></td></tr>
+						<tr><td>Wind Direction: {{basic.weather.winddirection}}</td><td>Temperature: {{basic.weather.temp}}</td><td></td></tr>
+						<tr><td>Count Time: </td><td>{{basic.count_time.start}} to {{basic.count_time.end}}</td><td> Min({{basic.count_time.total}})</td></tr>
+						<tr><td>Water Source: {{basic.notes.waterSource}}</td><td colspan="2">{{basic.notes.waterNotes}}</td></tr>
+						<tr><td>Nectar Source: {{basic.notes.nectarSource}}</td><td colspan="2">{{basic.notes.nectarNotes}}</td></tr>
+						<tr><td colspan="3">Notes: {{basic.notes.additionalNotes}}</td></tr>
+					</table>
+					<a href="#basic{{basic.id}}" role="button" class="btn" data-toggle="modal">More Information</a>
+ 
+					<!-- Modal -->
+					<div id="basic{{basic.id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Extra Information</h3>
+					  </div>
+					  <div class="modal-body">
+						<object data=data/?id={{basic.id}} width="600" height="600"> 
+							<embed src=data/?id={{basic.id}} width="600" height="600"> 
+							</embed> 
+							Error: Embedded data could not be displayed. 
+						</object>
+					  </div>
+					  <div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+					  </div>
+					</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+		<!-- Button to trigger modal -->
 		<form class="form-signin" action="../logout/" method="post">
 		  {% csrf_token %}
 		  <button class="btn btn-primary" name="logout" type="submit" >logout</button>
 		</form>
 		<script src="http://code.jquery.com/jquery.js"></script>
-		<script src="{% static "bootstrap.min.js" %}"></script>
+		<script src="{% static 'bootstrap.min.js' %}"></script>
+		<script src="{% static 'bootstrap-collapse.js' %}"></script>
+		<script src="{% static 'bootstrap-modal.js' %}"></script>
+		<script type="text/javascript">
+		$(function () {
+			$(".collapse").collapse()
+			{% for basic in basics %}
+				$('#basic{{basic.id}}').modal(options)
+			{% endfor %}
+		});
+		</script>
 	  </div>
   </body>
 </html>
