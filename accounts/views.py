@@ -91,8 +91,17 @@ def logoutPage(request):
 
 def home(request):
 	if request.user.is_authenticated():
-		basics = Basic.objects.all().filter(createdBy = request.user)
-		return render(request, "accounts/home.html", {"user": request.user, "basics":basics,})
+		if "start" not in request.GET:
+			num = 0
+		else:
+			try:
+				num = int(request.GET['start'])
+			except ValueError:
+				num = 0
+			if num < 0:
+				num = 0
+		basics = Basic.objects.all().filter(createdBy = request.user).order_by('date')[num:num+5]
+		return render(request, "accounts/home.html", {"user": request.user, "basics":basics,"start":num})
 	else:
 		return redirect("/accounts/")
 		

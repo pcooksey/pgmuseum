@@ -7,10 +7,8 @@
   </head>
   <body>
 	  <div id="container">
-	  <img src="http://www.pgmuseum.org/sites/default/files/zen_ninesixty_logo.png" alt="Image">
-	  <h2> Hello, {{ user }} </h2>
-	  </div>
-	  <div id="container">
+		<img src="http://www.pgmuseum.org/sites/default/files/zen_ninesixty_logo.png" alt="Image">
+		<h2> Hello, {{ user }} </h2>
 		<form class="form-signin" action="/datasheet/" method="POST">
 		  {% csrf_token %}
 		  <button class="btn btn-primary" name="new" type="submit" >Add to Database</button>
@@ -22,7 +20,7 @@
 			<div class="accordion-group">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{forloop.counter}}">
-					{{basic.site_name}} ( {{basic.date}} )
+					( {{basic.date}} ) {{basic.site_name}}
 					</a>
 				</div>
 				<div id="collapse{{forloop.counter}}" class="accordion-body collapse in">
@@ -51,8 +49,8 @@
 						<h3 id="myModalLabel">Extra Information</h3>
 					  </div>
 					  <div class="modal-body">
-						<object data=data/?id={{basic.id}} width="600" height="600"> 
-							<embed src=data/?id={{basic.id}} width="600" height="600"> 
+						<object data=data/?id={{basic.id}} width="600" height="400"> 
+							<embed src=data/?id={{basic.id}} width="600" height="400"> 
 							</embed> 
 							Error: Embedded data could not be displayed. 
 						</object>
@@ -66,7 +64,23 @@
 			</div>
 			{% endfor %}
 		</div>
+		{% else %}
+		<div class="alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Warning!</strong> No search results were returned.
+		</div>
 		{% endif %}
+		<div class="pagination">
+			<ul>
+				{% if start|add:'-5' >= 0 %}
+					<li><a href="?start={{start|add:'-5'}}">Prev</a></li>
+				{% else %}
+					<li class="disabled"><a href="#" onclick='return false'>Prev</a></li>
+				{% endif %}
+				<li class="active"><a href="?start={{start}}">{{start}}</a></li>
+				<li><a href="?start={{start|add:'5'}}">Next</a></li>
+			</ul>
+		</div>
 		<!-- Button to trigger modal -->
 		<form class="form-signin" action="../logout/" method="post">
 		  {% csrf_token %}

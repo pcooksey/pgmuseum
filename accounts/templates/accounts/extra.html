@@ -2,12 +2,14 @@
 <html>
   {% load staticfiles %}
   <head>
-	<link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
   </head>
-  <body>
+  <body style='background: #F8FBF4;'>
 		{% if flowers %}
 			<table class="table table-striped">
+				<thead>
 				<tr><th>Flower</th><th>Flower Bed#</th><th># of Monarchs Eating</th>
+				</thead>
 				<tr><td>Butterfly Bush (Purple)</td><td>{{flowers.butterfly_bush_purple}}</td><td>{{flowers.monarchs_eating_butterfly_bush_purple}}</td></tr>
 				<tr><td>Butterfly Bush (Yellow)</td><td>{{flowers.butterfly_bush_yellow}}</td><td>{{flowers.monarchs_eating_butterfly_bush_yellow}}</td></tr>
 				<tr><td>Chaste Tree</td><td>{{flowers.chaste_tree}}</td><td>{{flowers.monarchs_eating_chaste_tree}}</td></tr>
@@ -21,7 +23,7 @@
 		{% endif %}
 		{% if clusters %}
 			<table class="table table-striped">
-				<tr><th># Monarches Clustered</th><th># Tagged</th><th>Tree Species</th><th>Aspect</th><th>Height</th>
+				<thead><tr><th># Clustered</th><th># Tagged</th><th>Tree Species</th><th>Aspect</th><th>Height</th></thead>
 				{% for cluster in clusters %}
 					<tr>
 						<td>{{cluster.number_Clustered}}</td>
