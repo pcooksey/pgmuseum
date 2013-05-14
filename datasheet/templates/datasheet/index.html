@@ -5,7 +5,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
   </head>
-  <body id="container">
+  <body>
+  <div id="container">
+	<ul class="pager">
+		<li class="previous"><a href="/">Home</a></li>
+	</ul>
     <h3>Data Sheet</h3>
     <form autocomplete="off" method="POST" action="">
       {% csrf_token %}
@@ -203,5 +207,6 @@
 			$("[data-toggle='tooltip']").tooltip();
 		});
 	</script>
+  </div>
   </body>
 </html>

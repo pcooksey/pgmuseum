@@ -1,3 +1,4 @@
+import csv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django import forms
@@ -5,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from accounts.models import AccessCode
 from django.core.exceptions import ObjectDoesNotExist
+from django.template import loader, Context
 
 def index(request):
   context = {}
@@ -91,3 +93,25 @@ def home(request):
     return render(request, "accounts/home.html", {"user": request.user,})
   else:
     return redirect("/accounts/")
+	
+def export(request):
+	if request.user.is_authenticated():
+		# Create the HttpResponse object with the appropriate CSV header.
+		response = HttpResponse(content_type='text/csv')
+		response['Content-Disposition'] = 'attachment; filename="pgmuseumdatabase.csv"'
+
+		# The data is hard-coded here, but you could load it from a database or
+		# some other source.
+		csv_data = (
+			('First row', 'Foo', 'Bar', 'Baz'),
+			('Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"),
+		)
+
+		t = loader.get_template('accounts/database.txt')
+		c = Context({
+			'data': csv_data,
+		})
+		response.write(t.render(c))
+		return response
+	else:
+		return redirect("/accounts/")

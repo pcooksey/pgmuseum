@@ -6,4 +6,5 @@ urlpatterns = patterns("",
   url(r"^register/$", views.register, name="register"),
   url(r"^home/$", views.home, name="home"),
   url(r"^logout/$", views.logoutPage, name="logout"),
+  url(r"^home/export/$", views.export, name="export"),
 )

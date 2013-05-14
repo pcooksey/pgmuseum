@@ -5,7 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
-  <body id="loginContainer">
+  <body>
+  <div id="container">
     <form autocomplete="off" class="form-signin" action="" method="post">
       {% csrf_token %}
       <h3 class="form-signin-heading">Please register</h3>
@@ -22,5 +23,6 @@
     </form>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static "bootstrap.min.js" %}"></script>
+  </div>
   </body>
 </html>

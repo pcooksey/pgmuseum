@@ -2,20 +2,26 @@
 <html>
   {% load staticfiles %}
   <head>
-    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
   </head>
-  <body id="loginContainer">
-	<h2> Hello, {{ user }} </h2>
-	<form class="form-signin" action="/datasheet/" method="POST">
-	  {% csrf_token %}
-	  <button class="btn btn-primary" name="new" type="submit" >Add to Database</button>
-	</form>
-	<form class="form-signin" action="../logout/" method="post">
-	  {% csrf_token %}
-	  <button class="btn btn-primary" name="logout" type="submit" >logout</button>
-	</form>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{% static "bootstrap.min.js" %}"></script>
+  <body>
+	  <div id="container">
+	  <img src="http://www.pgmuseum.org/sites/default/files/zen_ninesixty_logo.png" alt="Image">
+	  <h2> Hello, {{ user }} </h2>
+	  </div>
+	  <div id="container">
+		<form class="form-signin" action="/datasheet/" method="POST">
+		  {% csrf_token %}
+		  <button class="btn btn-primary" name="new" type="submit" >Add to Database</button>
+		  <input type="button" class="btn btn-primary" value="Export" onclick="location.href='export/';">
+		</form>
+		<form class="form-signin" action="../logout/" method="post">
+		  {% csrf_token %}
+		  <button class="btn btn-primary" name="logout" type="submit" >logout</button>
+		</form>
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="{% static "bootstrap.min.js" %}"></script>
+	  </div>
   </body>
 </html>

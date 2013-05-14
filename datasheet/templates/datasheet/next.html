@@ -5,7 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}" />
   </head>
-  <body id="container">
+  <body>
+  <div id="container">
     <h3>Cluster Information</h3>
 	{% if ClusterForm %}
       <form autocomplete="off" method="POST" action="">
@@ -86,7 +87,7 @@
     </table>
 	{% if Flowers %}
 		<ul class="pager">
-			<li class="previous"><a href="?id={{ request.GET.id }}&done=true&flower=true">Finish</a></li>
+			<li class="previous"><a href="?id={{ request.GET.id }}&done=true&flower=true">Next</a></li>
 		</ul>
 	{% else %}
 		<ul class="pager">
@@ -101,5 +102,6 @@
 			$("[data-toggle='tooltip']").tooltip();
 		});
 	</script>
+  </div>
   </body>
 </html>

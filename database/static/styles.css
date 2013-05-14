@@ -1,19 +1,28 @@
 html {
-  background: #edeae1;
+  margin: 0; 
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background:#6d92a7 url(http://www.pgmuseum.org/sites/all/themes/zen_ninesixty/images/body-bg.jpg) no-repeat; 
+  margin: 0; 
+  width: 100%;
+  height: 100%;
 }
 
 #container {
   width: 550px;
   margin: 0px auto;
   padding: 25px 40px;
-  background: white;
+  background: #F8FBF4;
 }
 
 #loginContainer {
   width: 400px;
   margin: 5% auto 0 auto;
   padding: 25px 40px;
-  background: white;
+  background: #F8FBF4;
 }
 
 #submit {
