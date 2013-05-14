@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from accounts.models import AccessCode
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader, Context
+from datasheet.models import *
 
 def index(request):
   context = {}
@@ -102,11 +103,81 @@ def export(request):
 
 		# The data is hard-coded here, but you could load it from a database or
 		# some other source.
-		csv_data = (
-			('First row', 'Foo', 'Bar', 'Baz'),
-			('Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"),
-		)
-
+		csv_data = [["Id","Date","Site Code","Site Name", "Number of Observers","Observers", "Exploration Start", "Exploration End", "Exploration Total", "Loners","Sunners","Fliers","Grounders","Dead","Mating","Total","Sky Percentage","BFT","Precip","Wind","Wind Direction", "Temperature","Count Start","Count End","Count Total","Water Source","Water Notes", "Nectar Source", "Nectar Notes", "Additional Notes","Bush Purple", "Butterfiles Eating", "Bush Yellow","Butterfiles Eating","Chaste Tree","Butterfiles Eating","Daisy Tree","Butterfiles Eating","Mallow Pink","Butterfiles Eating","Mallow Purple", "Butterfiles Eating","Goldenrod","Butterfiles Eating","Yellow Daisy","Butterfiles Eating","Bottlebrush Red","Butterfiles Eating", "Number clustered", "Number Tagged", "Tree species", "Number of Trees", "Aspect", "Height"]]
+		basic = Basic.objects.all()
+		clusters = ClusterInfo.objects.all() #.filter(basic = basic)
+		for data in basic:
+			list = []
+			print data.id
+			list.append(data.id)
+			list.append(data.date)
+			list.append(data.site_name.Code)
+			list.append(data.site_name)
+			list.append(data.number_of_observers)
+			list.append(data.observers)
+			list.append(data.exploration_time.start)
+			list.append(data.exploration_time.end)
+			list.append(data.exploration_time.total)
+			list.append(data.butterflies_observed.loners)
+			list.append(data.butterflies_observed.sunners)
+			list.append(data.butterflies_observed.fliers)
+			list.append(data.butterflies_observed.grounders)
+			list.append(data.butterflies_observed.dead)
+			list.append(data.butterflies_observed.mating)
+			list.append(data.butterflies_observed.total)
+			list.append(data.weather.skypercentage)
+			list.append(data.weather.BFT)
+			list.append(data.weather.precip)
+			list.append(data.weather.wind)
+			list.append(data.weather.winddirection)
+			list.append(data.weather.temp)
+			list.append(data.count_time.start)
+			list.append(data.count_time.end)
+			list.append(data.count_time.total)
+			list.append(data.notes.waterSource)
+			list.append(data.notes.waterNotes)
+			list.append(data.notes.nectarSource)
+			list.append(data.notes.nectarNotes)
+			list.append(data.notes.additionalNotes)
+			if data.site_name.Code == "PG":
+				try:
+					flowers = Flowers.objects.get(basic = data)
+					list.append(flowers.butterfly_bush_purple)
+					list.append(flowers.monarchs_eating_butterfly_bush_purple)
+					list.append(flowers.butterfly_bush_yellow)
+					list.append(flowers.monarchs_eating_butterfly_bush_yellow)
+					list.append(flowers.chaste_tree)
+					list.append(flowers.monarchs_eating_chaste_tree)
+					list.append(flowers.daisy_tree)
+					list.append(flowers.monarchs_eating_daisy_tree)
+					list.append(flowers.mallow_pink)
+					list.append(flowers.monarchs_eating_mallow_pink)
+					list.append(flowers.mallow_purple)
+					list.append(flowers.monarchs_eating_mallow_purple)
+					list.append(flowers.goldenrod)
+					list.append(flowers.monarchs_eating_goldenrod)
+					list.append(flowers.yellow_daisy)
+					list.append(flowers.monarchs_eating_yellow_daisy)
+					list.append(flowers.bottlebrush_red)
+					list.append(flowers.monarchs_eating_bottlebrush_red)
+				except ObjectDoesNotExist:
+					for num in range(0,15):
+						list.append("N/A")
+			else:
+				for num in range(0,15):
+					list.append("N/A")
+					
+			clusters = ClusterInfo.objects.all().filter(basic = data)
+			for cluster in clusters:
+				list.append(cluster.number_Clustered)
+				list.append(cluster.number_tagged)
+				list.append(cluster.tree_species)
+				list.append(cluster.number_of_trees)
+				list.append(cluster.aspect)
+				list.append(cluster.height)
+			
+			csv_data.append(list)
+			
 		t = loader.get_template('accounts/database.txt')
 		c = Context({
 			'data': csv_data,
