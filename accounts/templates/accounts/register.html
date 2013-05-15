@@ -10,13 +10,18 @@
     <form autocomplete="off" class="form-signin" action="" method="post">
       {% csrf_token %}
       <h3 class="form-signin-heading">Please register</h3>
-      <input id="email" type="email" class="input-block-level" name="email" placeholder="Email address">
+      <input id="email" type="email" class="input-block-level" name="email" placeholder="Email address" value="{{email}}">
       <input type="password" class="input-block-level" name="password" placeholder="Password"> 
       <input type="password" class="input-block-level" name="confirmPassword" placeholder="Confirm password">
-      <input type="text" class="input-block-level" name="firstName" placeholder="First name">
-      <input type="text" class="input-block-level" name="lastName" placeholder="Last name">
+      <input type="text" class="input-block-level" name="firstName" placeholder="First name" value="{{firstName}}">
+      <input type="text" class="input-block-level" name="lastName" placeholder="Last name" value="{{lastName}}">
+	  {% if code %}
+	  <input type="text" class="input-block-level" name="accessCode" placeholder="Access Code" value="{{code}}">
+	  {% else %}
 	  <input type="text" class="input-block-level" name="accessCode" placeholder="Access Code">
+	  {% endif %}
       <button class="btn btn-primary" name="createAccount" type="submit">Register</button>
+	  <input type="button" class="btn btn-primary" value="Back" onclick="location.href='/';">
       {% if error %}
         <span class="label label-important">{{ error }}</span>
       {% endif %}

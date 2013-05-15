@@ -45,15 +45,15 @@ def register(request):
 		firstName = verifyPost(request, "firstName")
 		lastName = verifyPost(request, "lastName")
 		accessCode = verifyPost(request, "accessCode")
-		try:
-			if accessCode:
-				code = AccessCode.objects.get(Code = accessCode)
-			else:
-				return errorMessage(request, "Empty access code")
-		except ObjectDoesNotExist:
-			return errorMessage(request, "Invalid access code")
 
 		if email and password and firstName and lastName and password == confirmPassword:
+			try:
+				if accessCode:
+					code = AccessCode.objects.get(Code = accessCode)
+				else:
+					return errorMessage(request, "Empty access code")
+			except ObjectDoesNotExist:
+				return errorMessage(request, "Invalid access code")
 			object, created = User.objects.get_or_create(username = email)
 
 			if created:
@@ -71,12 +71,22 @@ def register(request):
 		else:
 			return errorMessage(request, "Please enter information in every field!")
 	else:
-		return render(request, "accounts/register.html", {})
+		if "code" in request.GET:
+			code = request.GET["code"]
+		else:
+			code = 0
+		return render(request, "accounts/register.html", {"code":code})
 
 def errorMessage(request, error):
-  context = { "error": error }
-
-  return render(request, "accounts/register.html", context)
+	email = verifyPost(request, "email")
+	firstName = verifyPost(request, "firstName")
+	lastName = verifyPost(request, "lastName")
+	if "code" in request.GET:
+		code = request.GET["code"]
+	else:
+		code = 0
+	context = { "error": error, "code":code,"firstName":firstName,"lastName":lastName,"email":email }
+	return render(request, "accounts/register.html", context)
 
 def verifyPost(request, string):
   if string in request.POST:
