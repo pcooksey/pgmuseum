@@ -1,4 +1,4 @@
-This is our database in a box project for CST-438.  This project is written with Python and Django.
+This is a new database webserver for storing information on Monarch Butterflies for the Pacific Grove Museum. This project is written with Python and Django.
 
 <ol>
 <li>Before running the server make sure that you create your database file and setup an admin account using <code>python manage.py syncdb</code>
