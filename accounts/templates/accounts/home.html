@@ -7,7 +7,7 @@
   </head>
   <body>
 	  <div id="container">
-		<img src="http://www.pgmuseum.org/sites/default/files/zen_ninesixty_logo.png" alt="Image">
+		<img src="/static/zen_ninesixty_logo.png" alt="Image">
 		<h2> Hello, {{ user.first_name }} {{user.last_name}} </h2>
 		<form class="form-signin" action="/datasheet/" method="POST">
 		  {% csrf_token %}
