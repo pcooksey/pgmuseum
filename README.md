@@ -7,6 +7,11 @@ This is a new database webserver for storing information on Monarch Butterflies 
 <li>For running the server on Heroku. Use the command <code>python my_django_app/manage.py collectstatic --noinput; gunicorn database.wsgi</code></li>
 </ol>
 
+Commands for deploying
+<ol>
+<li> Pushing to heroku <code> git push heroku yourbranch:master </code></li>
+</ol>
+
 Extra commands for Heroku
 <ol>
 <li> Resetting database <code> heroku pg:reset DATABASE </code>. However, it will destroy everything. </li>
