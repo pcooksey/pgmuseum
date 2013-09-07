@@ -45,9 +45,9 @@
 					</table>
 					<a href="#basic{{basic.id}}" role="button" class="btn" data-toggle="modal">More Information</a>
 					{% if user.is_staff %}
-					<form method="POST" action="delete/" style="margin-bottom:0px">
+					<form method="POST" action="delete/" style="margin: 0; padding: 0">
 						{% csrf_token %}
-						<button class="btn" name="delete" value="{{ basic.id }}" title="Delete" type="submit"><i class="icon-trash"></i></button>
+						<button class="btn" style="display:inline;" name="delete" value="{{ basic.id }}" title="Delete" type="submit"><i class="icon-trash"></i></button>
 					  </form>
 					{% endif %}
 					<!-- Modal -->
