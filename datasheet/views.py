@@ -86,10 +86,6 @@ def flowers(request):
 			site = basic.site_name.Code
 		except ObjectDoesNotExist:
 			return redirect('/datasheet/')
-		if site == 'PG':
-			flowers = True
-		else:
-			flowers = False
 		if request.method == 'GET':
 			flowerForm = FlowerForm()
 			context = {'FlowerForm': flowerForm,'request':request,"flowers":flowers,}
