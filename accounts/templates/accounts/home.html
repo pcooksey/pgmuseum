@@ -44,7 +44,12 @@
 						<tr><td colspan="3">Notes: {{basic.notes.additionalNotes}}</td></tr>
 					</table>
 					<a href="#basic{{basic.id}}" role="button" class="btn" data-toggle="modal">More Information</a>
- 
+					{% if user.is_staff %}
+					<form method="POST" action="delete/" style="margin-bottom:0px">
+						{% csrf_token %}
+						<button class="btn" name="delete" value="{{ basic.id }}" title="Delete" type="submit"><i class="icon-trash"></i></button>
+					  </form>
+					{% endif %}
 					<!-- Modal -->
 					<div id="basic{{basic.id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-header">
