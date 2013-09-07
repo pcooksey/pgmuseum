@@ -7,5 +7,13 @@ This is a new database webserver for storing information on Monarch Butterflies 
 <li>For running the server on Heroku. Use the command <code>python my_django_app/manage.py collectstatic --noinput; gunicorn database.wsgi</code></li>
 </ol>
 
+Extra commands for Heroku
+<ol>
+<li> Resetting database <code> heroku pg:reset DATABASE </code>. However, it will destroy everything. </li>
+<li> <code>heroku run python manage.py conver_to_south app_name </code> </li>
+<li> <code>heroku run python manage.py migrate app_name </code> </li>
+<li> For local migrate file use this command then migrate it again. <code>python django_project/manage.py schemamigration some_app --auto </code> </li>
+</ol>
+
 Also, we're using <code>Python 2.7.3</code> and <code>Django 1.5</code>
 The project is also running on Heroku at <code>http://pgmuseum.herokuapp.com</code>
