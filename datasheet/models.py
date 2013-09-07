@@ -89,12 +89,11 @@ class Basic(models.Model):
   notes = models.OneToOneField(Notes)
   
   def delete(self, *args, **kwargs):
-	self.notes.delete()
-	self.weather.delete()
-	self.observers.delete()
 	self.exploration_time.delete()
-	self.count_time.delete()
 	self.butterflies_observed.delete()
+	self.weather.delete()
+	self.count_time.delete()
+	self.notes.delete()
 	return super(self.__class__, self).delete(*args, **kwargs)
   
 class ClusterInfo(models.Model):
