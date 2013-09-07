@@ -34,7 +34,7 @@ class ExplorationForm(forms.ModelForm):
 
 class NotesForm(forms.ModelForm):
   class Meta:
-    model = Notes
+    model = Note
   def __init__(self, *args, **kwargs):
 	super(NotesForm, self).__init__(*args, **kwargs)
 	self.fields['waterNotes'].required = False

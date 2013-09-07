@@ -8,14 +8,14 @@ class SiteName(models.Model):
   def __unicode__(self):
     return self.site_name
 
-class TreeSpecies(models.Model):
+class TreeSpecie(models.Model):
   Code = models.CharField(max_length=5)
   tree_name = models.CharField(max_length=100)
   
   def __unicode__(self):
     return self.tree_name
 	
-class FlowerSpecies(models.Model):
+class FlowerSpecie(models.Model):
   flower_name = models.CharField(max_length=100)
   
   def __unicode__(self):
@@ -64,7 +64,7 @@ class Weather(models.Model):
   winddirection = models.CharField(max_length=20)
   temp = models.IntegerField()
   
-class Notes(models.Model):
+class Note(models.Model):
   ANSWER = (
     ('No','No'),
 	('Yes','Yes'),
@@ -86,7 +86,7 @@ class Basic(models.Model):
   butterflies_observed = models.OneToOneField(Observed)
   weather = models.OneToOneField(Weather)
   count_time = models.OneToOneField(CountTime)
-  notes = models.OneToOneField(Notes)
+  notes = models.OneToOneField(Note)
   
   def delete(self, *args, **kwargs):
 	self.exploration_time.delete()
@@ -101,7 +101,7 @@ class ClusterInfo(models.Model):
   basic = models.ForeignKey(Basic)
   number_Clustered = models.IntegerField()
   number_tagged = models.IntegerField()
-  tree_species = models.ForeignKey(TreeSpecies)
+  tree_species = models.ForeignKey(TreeSpecie)
   number_of_trees = models.IntegerField()
   aspect = models.IntegerField()
   height = models.IntegerField()
@@ -109,5 +109,5 @@ class ClusterInfo(models.Model):
 class Flowers(models.Model):
   id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
-  flower = models.ForeignKey(FlowerSpecies)
+  flower = models.ForeignKey(FlowerSpecie)
   eating = models.IntegerField()
