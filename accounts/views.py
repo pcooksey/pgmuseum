@@ -233,12 +233,6 @@ def delete(request):
     basic = Basic.objects.get(id = request.POST["delete"])
 
     if request.user.is_staff == True:
-	  basic.notes.delete()
-	  basic.weather.delete()
-	  basic.observers.delete()
-	  basic.exploration_time.delete()
-	  basic.count_time.delete()
-	  basic.butterflies_observed.delete()
 	  basic.delete()
  
     return redirect("/accounts/home/")
