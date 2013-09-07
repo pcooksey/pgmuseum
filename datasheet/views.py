@@ -92,7 +92,7 @@ def flowers(request):
 			flowers = False
 		if request.method == 'GET':
 			flowerForm = FlowerForm()
-			context = {'FlowerForm': flowerForm,'request':request,}
+			context = {'FlowerForm': flowerForm,'request':request,"flowers":flowers,}
 			return render(request, "datasheet/next/flowers.html", context)
 		elif request.method == 'POST':
 			flowerForm = FlowerForm(request.POST)
