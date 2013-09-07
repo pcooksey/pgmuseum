@@ -232,7 +232,7 @@ def delete(request):
   if request.user.is_authenticated():
     basic = Basic.objects.get(id = request.POST["delete"])
 
-    if request.user.is_staff() == True:
+    if request.user.is_staff == True:
       basic.delete()
  
     return redirect("/accounts/home/")
