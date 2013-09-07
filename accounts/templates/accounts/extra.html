@@ -8,17 +8,11 @@
 		{% if flowers %}
 			<table class="table table-striped">
 				<thead>
-				<tr><th>Flower</th><th>Flower Bed#</th><th># of Monarchs Eating</th>
+				<tr><th>Flower</th><th># of Eaten</th>
 				</thead>
-				<tr><td>Butterfly Bush (Purple)</td><td>{{flowers.butterfly_bush_purple}}</td><td>{{flowers.monarchs_eating_butterfly_bush_purple}}</td></tr>
-				<tr><td>Butterfly Bush (Yellow)</td><td>{{flowers.butterfly_bush_yellow}}</td><td>{{flowers.monarchs_eating_butterfly_bush_yellow}}</td></tr>
-				<tr><td>Chaste Tree</td><td>{{flowers.chaste_tree}}</td><td>{{flowers.monarchs_eating_chaste_tree}}</td></tr>
-				<tr><td>Daisy Tree</td><td>{{flowers.daisy_tree}}</td><td>{{flowers.monarchs_eating_daisy_tree}}</td></tr>
-				<tr><td>Mallow (Pink/Red)</td><td>{{flowers.mallow_pink}}</td><td>{{flowers.monarchs_eating_mallow_pink}}</td></tr>
-				<tr><td>Mallow (Purple/Lavendar)</td><td>{{flowers.mallow_purple}}</td><td>{{flowers.monarchs_eating_mallow_purple}}</td></tr>
-				<tr><td>Goldenrod</td><td>{{flowers.goldenrod}}</td><td>{{flowers.monarchs_eating_goldenrod}}</td></tr>
-				<tr><td>Yellow Daisy</td><td>{{flowers.yellow_daisy}}</td><td>{{flowers.monarchs_eating_yellow_daisy}}</td></tr>
-				<tr><td>Bottlebrush (red)</td><td>{{flowers.bottlebrush_red}}</td><td>{{flowers.monarchs_eating_bottlebrush_red}}</td></tr>
+				{% for flower in flowers %}
+				<tr><td>{{flower.flower}}</td><td>{{flowers.eating}}</td></tr>
+				{% endFor %}
 			</table>
 		{% endif %}
 		{% if clusters %}
