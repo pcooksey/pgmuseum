@@ -110,7 +110,10 @@ def home(request):
 				num = 0
 			if num < 0:
 				num = 0
-		basics = Basic.objects.all().filter(createdBy = request.user).order_by('date')[num:num+5]
+		if request.user.is_staff:
+			basics = Basic.objects.all().order_by('date')[num:num+5]
+		else
+			basics = Basic.objects.all().filter(createdBy = request.user).order_by('date')[num:num+5]
 		return render(request, "accounts/home.html", {"user": request.user, "basics":basics,"start":num})
 	else:
 		return redirect("/accounts/")
