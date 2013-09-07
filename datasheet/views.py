@@ -82,6 +82,7 @@ def flowers(request):
 		id = request.GET['id']
 		try:
 			basic = Basic.objects.get(createdBy = request.user, id=id)
+			flowers = Flowers.objects.all().filter(basic = basic)
 			site = basic.site_name.Code
 		except ObjectDoesNotExist:
 			return redirect('/datasheet/')
@@ -99,8 +100,7 @@ def flowers(request):
 				flower = flowerForm.save(commit = False)
 				flower.basic = basic
 				flower.save()
-				return redirect('/datasheet/')
-			context = {'FlowerForm': flowerForm,'request':request,}
+			context = {'FlowerForm': flowerForm,'request':request, "flowers":flowers,}
 			return render(request, "datasheet/next/flowers.html", context)	
 	else:
 		return redirect('/accounts/')

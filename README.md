@@ -1,4 +1,4 @@
-This is a new database webserver for storing information on Monarch Butterflies for the Pacific Grove Museum. This project is written with Python and Django.
+This is a new database webserver for storing information on Monarch Butterflies for the Pacific Grove Museum. This project is written with Python and Django. <a href="http://south.aeracode.org/>South</a> is used for migration of databases.
 
 <ol>
 <li>Before running the server make sure that you create your database file and setup an admin account using <code>python manage.py syncdb</code>

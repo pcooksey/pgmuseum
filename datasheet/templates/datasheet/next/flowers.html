@@ -12,14 +12,51 @@
       <form autocomplete="off" method="POST" action="">
         {% csrf_token %}
         <table>
+			<tr>
+				<td>Flower:</td>
+				<td>{{FlowerForm.flower}}
+				{% if FlowerForm.flower.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{FlowerForm.flower.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
+			<tr>
+				<td>Eating:</td>
+				<td>{{FlowerForm.eating}}
+				{% if FlowerForm.eating.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{FlowerForm.eating.errors.as_text}}'>Error</a> 
+				{% endif %}
+				</td>
+			</tr>
 			{{ FlowerForm.as_table }}
         </table>
-        <button class="btn btn-primary" name="add" type="submit">Submit</button>
+        <button class="btn btn-primary" name="add" type="submit">Add</button>
         {% if error %}
           <span id="errorMessage" class="label label-important">{{ error }}</span><br />
         {% endif %}
       </form>
 	{% endif %}
+	<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Flower</th>
+          <th>Eating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in flowers %}
+          <tr>
+            <td>{{ item.flower }}</td>
+            <td>{{ item.eating }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+	<ul class="pager">
+		<li class="previous"><a href="/accounts/">Finish</a></li>
+	</ul>
+	
+	
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{% static 'bootstrap.min.js' %}"></script>
 	<script src="{% static 'bootstrap-tooltip.js' %}"></script>

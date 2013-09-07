@@ -14,6 +14,12 @@ class TreeSpecies(models.Model):
   
   def __unicode__(self):
     return self.tree_name
+	
+class FlowerSpecies(models.Model):
+  flower_name = models.CharField(max_length=100)
+  
+  def __unicode__(self):
+    return self.flower_name
   
 class ExplorationTime(models.Model):
   start = models.TimeField()
@@ -95,21 +101,5 @@ class ClusterInfo(models.Model):
 class Flowers(models.Model):
   id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
-  butterfly_bush_purple = models.IntegerField()
-  monarchs_eating_butterfly_bush_purple = models.IntegerField()
-  butterfly_bush_yellow = models.IntegerField()
-  monarchs_eating_butterfly_bush_yellow = models.IntegerField()
-  chaste_tree= models.IntegerField()
-  monarchs_eating_chaste_tree= models.IntegerField()
-  daisy_tree = models.IntegerField()
-  monarchs_eating_daisy_tree = models.IntegerField()
-  mallow_pink = models.IntegerField()
-  monarchs_eating_mallow_pink = models.IntegerField()
-  mallow_purple = models.IntegerField()
-  monarchs_eating_mallow_purple = models.IntegerField()
-  goldenrod = models.IntegerField()
-  monarchs_eating_goldenrod = models.IntegerField()
-  yellow_daisy = models.IntegerField()
-  monarchs_eating_yellow_daisy = models.IntegerField()
-  bottlebrush_red = models.IntegerField()
-  monarchs_eating_bottlebrush_red = models.IntegerField()
+  flower = models.ForeignKey(FlowerSpecies)
+  eating = models.IntegerField()
