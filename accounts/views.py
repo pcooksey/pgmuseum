@@ -127,7 +127,7 @@ def extraInformation(request):
 				return HttpResponse("Does not exist")
 			if basic.site_name.Code == "PG":
 				try:
-					flowers = Flowers.objects.get(basic=basic)
+					flowers = Flowers.objects.all().filter(basic=basic)
 				except ObjectDoesNotExist:
 					flowers = ()
 			return render(request, "accounts/extra.html", {"clusters": clusters, "flowers": flowers,})
