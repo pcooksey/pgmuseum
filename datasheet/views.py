@@ -100,14 +100,3 @@ def flowers(request):
 			return render(request, "datasheet/next/flowers.html", context)	
 	else:
 		return redirect('/accounts/')
-		
-def delete(request):
-  if request.user.is_authenticated():
-    basic = Basic.objects.get(id = request.POST["delete"])
-
-    if request.user.is_staff():
-      basic.delete()
- 
-    return redirect("/accounts/home/")
-  else:
-    return redirect("/accounts/")
