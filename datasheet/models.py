@@ -56,8 +56,14 @@ class Weather(models.Model):
 	('rain','rain'),
 	('downpour','downpour'),
   )
+  PRECENTAGE = (
+    ('0-25%','0-25%'),
+	('26-50%','26-50%'),
+	('51-75%','51-75%'),
+	('76-100%','76-100%'),
+  )
   
-  skypercentage = models.IntegerField()
+  skypercentage = models.IntegerField(choices=PRECENTAGE, default='0-25%')
   BFT = models.IntegerField(max_length=1,choices=Beaufort_Scale_For_Sky, default=0)
   precip = models.CharField(max_length=10,choices=PRECIP, default='none')
   wind = models.IntegerField()
@@ -102,7 +108,7 @@ class ClusterInfo(models.Model):
   number_Clustered = models.IntegerField()
   number_tagged = models.IntegerField()
   tree_species = models.ForeignKey(TreeSpecie)
-  number_of_trees = models.IntegerField()
+  tree_ID = models.CharField(max_length=20)
   aspect = models.IntegerField()
   height = models.IntegerField()
   
@@ -110,4 +116,5 @@ class Flowers(models.Model):
   id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
   flower = models.ForeignKey(FlowerSpecie)
+  flower_bed = models.IntegerField()
   eating = models.IntegerField()

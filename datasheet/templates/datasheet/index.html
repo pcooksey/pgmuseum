@@ -108,18 +108,18 @@
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.skypercentage.errors.as_text}}'>Error</a> 
 				{% endif %}
 				</br>{{WeatherForm.skypercentage}}</td>
-			<td>bft: 
+			<td>BFT
 				{% if WeatherForm.bft.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.bft.errors.as_text}}'>Error</a> 
 				{% endif %}
 				{{WeatherForm.BFT}}</td>
 		</tr>
-		<tr><td>Precip: 
+		<tr><td>Precipitation: 
 				{% if WeatherForm.precip.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.precip.errors.as_text}}'>Error</a> 
 				{% endif %}
 				</br> {{WeatherForm.precip}}</td>
-			<td>Wind: 
+			<td>Wind (km/hr): 
 				{% if WeatherForm.wind.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.wind.errors.as_text}}'>Error</a> 
 				{% endif %}
@@ -130,7 +130,7 @@
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.winddirection.errors.as_text}}'>Error</a> 
 				{% endif %}
 				{{WeatherForm.winddirection}}</td>
-			<td>Temp (&deg;C):
+			<td>Temperature (&deg;C):
 				{% if WeatherForm.temp.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{WeatherForm.temp.errors.as_text}}'>Error</a> 
 				{% endif %}
