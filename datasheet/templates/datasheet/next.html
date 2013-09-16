@@ -40,14 +40,14 @@
 				{% endif %}
 				</td>
 			</tr>
-			<tr><td>Cluster Aspect(degrees):</td>
+			<tr><td>Cluster Aspect (degrees):</td>
 				<td> {{ClusterForm.aspect}}
 				{% if ClusterForm.aspect.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.aspect.errors.as_text}}'>Error</a> 
 				{% endif %}
 				</td>
 			</tr>
-			<tr><td>Cluster Height(m):</td>
+			<tr><td>Cluster Height (m):</td>
 				<td> {{ClusterForm.height}}
 				{% if ClusterForm.height.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.height.errors.as_text}}'>Error</a> 
@@ -66,8 +66,8 @@
         <tr>
           <th>Monarch Clustered</th>
           <th>Tagged in Cluster</th>
+		  <th>Tree ID</th>
 		  <th>Tree Species </th>
-		  <th>Number of Trees</th>
 		  <th>Cluster Aspect (degrees)</th>
 		  <th>Cluster Height (meters)</th>
         </tr>
@@ -77,8 +77,8 @@
           <tr>
             <td>{{ item.number_Clustered }}</td>
             <td>{{ item.number_tagged }}</td>
+			<td>{{ item.tree_ID }}</td>
             <td>{{ item.tree_species }}</td>
-			<td>{{ item.number_of_trees }}</td>
 			<td>{{ item.aspect }}%</td>
 			<td>{{ item.height }}m</td>
           </tr>
