@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Flowers.flower_bed'
         db.add_column(u'datasheet_flowers', 'flower_bed',
-                      self.gf('django.db.models.fields.IntegerField')(default=''),
+                      self.gf('django.db.models.fields.IntegerField')(null=True, blank=True),
                       keep_default=False)
 
 
@@ -100,7 +100,7 @@ class Migration(SchemaMigration):
             'basic': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['datasheet.Basic']"}),
             'eating': ('django.db.models.fields.IntegerField', [], {}),
             'flower': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['datasheet.FlowerSpecie']"}),
-            'flower_bed': ('django.db.models.fields.IntegerField', [], {'blank':'True', 'null':'True'}),
+            'flower_bed': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         u'datasheet.flowerspecie': {
