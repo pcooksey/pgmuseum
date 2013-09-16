@@ -116,5 +116,5 @@ class Flowers(models.Model):
   id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
   flower = models.ForeignKey(FlowerSpecie)
-  flower_bed = models.IntegerField()
+  flower_bed = models.IntegerField(blank=True, null=True)
   eating = models.IntegerField()
