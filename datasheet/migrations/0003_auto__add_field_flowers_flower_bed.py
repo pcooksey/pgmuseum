@@ -100,7 +100,7 @@ class Migration(SchemaMigration):
             'basic': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['datasheet.Basic']"}),
             'eating': ('django.db.models.fields.IntegerField', [], {}),
             'flower': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['datasheet.FlowerSpecie']"}),
-            'flower_bed': ('django.db.models.fields.IntegerField', [], {}),
+            'flower_bed': ('django.db.models.fields.IntegerField', [], {'blank':'True', 'null':'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         u'datasheet.flowerspecie': {
