@@ -63,7 +63,7 @@ class Weather(models.Model):
 	('76-100%','76-100%'),
   )
   
-  skypercentage = models.IntegerField(choices=PRECENTAGE, default='0-25%')
+  skypercentage = models.CharField(max_length=10,choices=PRECENTAGE, default='0-25%')
   BFT = models.IntegerField(max_length=1,choices=Beaufort_Scale_For_Sky, default=0)
   precip = models.CharField(max_length=10,choices=PRECIP, default='none')
   wind = models.IntegerField()
