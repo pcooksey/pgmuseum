@@ -17,12 +17,13 @@
 		{% endif %}
 		{% if clusters %}
 			<table class="table table-striped">
-				<thead><tr><th># Clustered</th><th># Tagged</th><th>Tree Species</th><th>Aspect</th><th>Height</th></thead>
+				<thead><tr><th># Clustered</th><th># Tagged</th><th>Tree ID</th><th>Tree Species</th><th>Aspect</th><th>Height</th></thead>
 				{% for cluster in clusters %}
 					<tr>
 						<td>{{cluster.number_Clustered}}</td>
 						<td>{{cluster.number_tagged}}</td>
-						<td>{{cluster.tree_species}} ({{cluster.number_of_trees}})</td>
+						<td>{{cluster.tree_ID}}</td>
+						<td>{{cluster.tree_species}}</td>
 						<td>{{cluster.aspect}}</td>
 						<td>{{cluster.height}}</td>
 					</tr>
