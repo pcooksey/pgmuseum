@@ -1,5 +1,12 @@
 This is a new database webserver for storing information on Monarch Butterflies for the Pacific Grove Museum. This project is written with Python and Django. <a href="http://south.aeracode.org/">South</a> is used for migration of databases.
 
+Process flow for project:
+<ol>
+<li>Make changes to Master branch and commit them</li>
+<li>For deployment, change to deploy branch and pull changes from master <code> git pull origin master </code></li>
+<li>Update heroku: <code> git push heroku deploy:master </code></li>
+</ol>
+
 For running website locally on computer:
 <ol>
 <li>Before running the server make sure to create your database file and setup an admin account using <code>python manage.py syncdb</code>
