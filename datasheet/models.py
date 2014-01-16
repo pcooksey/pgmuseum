@@ -68,7 +68,7 @@ class Weather(models.Model):
   precip = models.CharField(max_length=10,choices=PRECIP, default='none')
   wind = models.IntegerField()
   winddirection = models.CharField(max_length=20)
-  temp = models.IntegerField()
+  temp = models.DecimalField(max_digits=5, decimal_places=2)
   
 class Note(models.Model):
   ANSWER = (
