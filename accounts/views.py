@@ -8,6 +8,7 @@ from accounts.models import AccessCode
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader, Context
 from datasheet.models import *
+from django.db.models import Count
 
 def index(request):
   context = {}
@@ -111,9 +112,9 @@ def home(request):
 			if num < 0:
 				num = 0
 		if request.user.is_staff:
-			basics = Basic.objects.all().order_by('date')[num:num+5]
+			basics = Basic.objects.all().order_by('-date')[num:num+5]
 		else:
-			basics = Basic.objects.all().filter(createdBy = request.user).order_by('date')[num:num+5]
+			basics = Basic.objects.all().filter(createdBy = request.user).order_by('-date')[num:num+5]
 		return render(request, "accounts/home.html", {"user": request.user, "basics":basics,"start":num})
 	else:
 		return redirect("/accounts/")
@@ -235,3 +236,10 @@ def delete(request):
     return redirect("/accounts/home/")
   else:
     return redirect("/accounts/")
+	
+def graph(request):
+  if request.user.is_authenticated():
+	basic = Basic.objects.values('site_name').annotate(count = Count('site_name'))
+	return render(request, "accounts/graph.html", {"basics": basic})
+  else:
+	return redirect("/accounts/")
