@@ -5,19 +5,16 @@ Process flow for project:
 <li>Make changes to Master branch and commit them</li>
 <li>For deployment, change to deploy branch and pull changes from master <code> git merge master </code></li>
 <li>Update heroku: <code> git push heroku deploy:master </code></li>
-<li>For changes to the model in master branch: <li>
+<li>For changes to the model in master branch: </li>
 <li> 
-	<code>
-		python manage.py schemamigration some_app --auto
-		git add .
-		git commit -m "Adding new migrations"
-		git checkout deploy
-		git merge master
-		git push heroku deploy:master
-		heroku run python manage.py migrate appname
-	</code>
+<pre><code>python manage.py schemamigration some_app --auto
+git add .
+git commit -m "Adding new migrations"
+git checkout deploy
+git merge master
+git push heroku deploy:master
+heroku run python manage.py migrate appname</code></pre>
 </li>
-</ol>
 </ol>
 
 For running website locally on computer:
