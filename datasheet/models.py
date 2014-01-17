@@ -24,13 +24,11 @@ class FlowerSpecie(models.Model):
 class ExplorationTime(models.Model):
   start = models.TimeField()
   end = models.TimeField()
-  total = models.IntegerField()
   exploration_total = models.IntegerField()
   
 class CountTime(models.Model):
   start = models.TimeField()
   end = models.TimeField()
-  total = models.IntegerField()
   count_total = models.IntegerField()
   
 class Observed(models.Model):
@@ -40,7 +38,6 @@ class Observed(models.Model):
   grounders = models.IntegerField()
   dead = models.IntegerField()
   mating = models.IntegerField()
-  total = models.IntegerField()
   observed_total = models.IntegerField()
   
 class Weather(models.Model):
