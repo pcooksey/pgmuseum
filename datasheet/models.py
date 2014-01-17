@@ -109,12 +109,10 @@ class ClusterInfo(models.Model):
   number_tagged = models.IntegerField()
   tree_species = models.ForeignKey(TreeSpecie)
   tree_ID = models.CharField(max_length=20)
-  aspect = models.IntegerField()
   height = models.DecimalField(max_digits=5, decimal_places=2)
   
 class Flowers(models.Model):
   id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
   flower = models.ForeignKey(FlowerSpecie)
-  flower_bed = models.IntegerField(blank=True, null=True)
   eating = models.IntegerField()
