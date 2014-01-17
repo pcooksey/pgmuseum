@@ -27,6 +27,50 @@ class WeatherForm(forms.ModelForm):
 class ObservedForm(forms.ModelForm):
   class Meta:
     model = Observed
+  def __init__(self, *args, **kwargs):
+	super(ObservedForm, self).__init__(*args, **kwargs)
+	self.fields['loners'].required = False
+	self.fields['sunners'].required = False
+	self.fields['fliers'].required = False
+	self.fields['grounders'].required = False
+	self.fields['dead'].required = False
+	self.fields['mating'].required = False
+	self.fields['total'].required = False
+  def clean_loners(self):
+	data = self.cleaned_data['loners']
+	if not data:
+		return 0
+	return self.cleaned_data['loners']
+  def clean_sunners(self):
+	data = self.cleaned_data['sunners']
+	if not data:
+		return 0
+	return self.cleaned_data['sunners']
+  def clean_fliers(self):
+	data = self.cleaned_data['fliers']
+	if not data:
+		return 0
+	return self.cleaned_data['fliers']
+  def clean_grounders(self):
+	data = self.cleaned_data['grounders']
+	if not data:
+		return 0
+	return self.cleaned_data['grounders']
+  def clean_dead(self):
+	data = self.cleaned_data['dead']
+	if not data:
+		return 0
+	return self.cleaned_data['dead']
+  def clean_mating(self):
+	data = self.cleaned_data['mating']
+	if not data:
+		return 0
+	return self.cleaned_data['mating']
+  def clean_total(self):
+	data = self.cleaned_data['total']
+	if not data:
+		return 0
+	return self.cleaned_data['total']
 	
 class ExplorationForm(forms.ModelForm):
   class Meta:
