@@ -7,7 +7,7 @@ Process flow for project:
 <li>Update heroku: <code> git push heroku deploy:master </code></li>
 <li>For changes to the model in master branch: </li>
 <li> 
-	```Batchfile
+	<pre><code>
 		python manage.py schemamigration some_app --auto
 		git add .
 		git commit -m "Adding new migrations"
@@ -15,7 +15,7 @@ Process flow for project:
 		git merge master
 		git push heroku deploy:master
 		heroku run python manage.py migrate appname
-	```
+	</code></pre>
 </li>
 </ol>
 
