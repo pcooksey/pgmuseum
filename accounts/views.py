@@ -123,11 +123,18 @@ def extraInformation(request):
 		if "id" in request.GET:
 			clusters = ()
 			flowers = ()
-			try:
-				basic = Basic.objects.get(id = request.GET["id"], createdBy = request.user)
-				clusters = ClusterInfo.objects.all().filter(basic = basic)
-			except ObjectDoesNotExist:
-				return HttpResponse("Does not exist")
+			if request.user.is_staff:
+				try:
+					basic = Basic.objects.get(id = request.GET["id"])
+					clusters = ClusterInfo.objects.all().filter(basic = basic)
+				except ObjectDoesNotExist:
+					return HttpResponse("Does not exist")
+			else:
+				try:
+					basic = Basic.objects.get(id = request.GET["id"], createdBy = request.user)
+					clusters = ClusterInfo.objects.all().filter(basic = basic)
+				except ObjectDoesNotExist:
+					return HttpResponse("Does not exist")
 			if basic.site_name.Code == "PG":
 				try:
 					flowers = Flowers.objects.all().filter(basic=basic)
