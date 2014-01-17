@@ -35,7 +35,7 @@ class ObservedForm(forms.ModelForm):
 	self.fields['grounders'].required = False
 	self.fields['dead'].required = False
 	self.fields['mating'].required = False
-	self.fields['total'].required = False
+	self.fields['observed_total'].required = False
   def clean_loners(self):
 	data = self.cleaned_data['loners']
 	if not data:
@@ -66,11 +66,11 @@ class ObservedForm(forms.ModelForm):
 	if not data:
 		return 0
 	return self.cleaned_data['mating']
-  def clean_total(self):
-	data = self.cleaned_data['total']
+  def clean_observed_total(self):
+	data = self.cleaned_data['observed_total']
 	if not data:
 		return 0
-	return self.cleaned_data['total']
+	return self.cleaned_data['observed_total']
 	
 class ExplorationForm(forms.ModelForm):
   class Meta:

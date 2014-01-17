@@ -53,10 +53,10 @@
 		</tr>
 		<tr>
 			<td colspan="2">Total (min): 
-			{% if ExplorationForm.total.errors %}
-					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.total.errors.as_text}}'>Error</a> 
+			{% if ExplorationForm.exploration_total.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.exploration_total.errors.as_text}}'>Error</a> 
 			{% endif %}
-			</br> {{ExplorationForm.total}}</td>
+			</br> {{ExplorationForm.exploration_total}}</td>
         </tr>
       </table>
 	  <table class="table table-bordered">
@@ -95,10 +95,10 @@
 				<br/>{{ObservedForm.mating}}</td>
 		</tr>
 		<tr><td colspan="2">Total outside of cluster:  
-				{% if ObservedForm.total.errors %}
-					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.total.errors.as_text}}'>Error</a> 
+				{% if ObservedForm.observed_total.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ObservedForm.observed_total.errors.as_text}}'>Error</a> 
 				{% endif %}
-				{{ObservedForm.total}}</td>
+				{{ObservedForm.observed_total}}</td>
 		</tr>
       </table>
 	  <table class="table table-bordered">
@@ -153,10 +153,10 @@
 		</tr>
 		<tr>
 			<td colspan="2">Total (min):
-				{% if CountForm.total.errors %}
-					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.total.errors.as_text}}'>Error</a> 
+				{% if CountForm.count_total.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.count_total.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{CountForm.total}}</td>
+				</br> {{CountForm.count_total}}</td>
         </tr>
       </table>
 	  <table class="table table-bordered">
