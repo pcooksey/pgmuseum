@@ -191,29 +191,30 @@ def export(request):
 			list.append(data.notes.additionalNotes)
 			csv_data.append(list)
 			
-			if data.site_name.Code == "PG":
+			flowers = Flowers.objects.all().filter(basic = data)
+			if data.site_name.Code == "PG" and flowers:
 				list = ["","Flower","Eating"]
 				csv_data.append(list)
-				flowers = Flowers.objects.all().filter(basic = data)
 				for flower in flowers:
 					list = []
 					list.append("")
 					list.append(flower.flower)
 					list.append(flower.eating)
 					csv_data.append(list)
-				
-			list = ["","Number clustered", "Number Tagged", "Tree species", "Number of Trees", "Height"]
-			csv_data.append(list)
-			clusters = ClusterInfo.objects.all().filter(basic = data)
-			for cluster in clusters:
-				list = []
-				list.append("")
-				list.append(cluster.number_Clustered)
-				list.append(cluster.number_tagged)
-				list.append(cluster.tree_species)
-				list.append(cluster.tree_ID)
-				list.append(cluster.height)
+			
+			clusters = ClusterInfo.objects.all().filter(basic = data)	
+			if clusters:
+				list = ["","Number clustered", "Number Tagged", "Tree species", "Number of Trees", "Height"]
 				csv_data.append(list)
+				for cluster in clusters:
+					list = []
+					list.append("")
+					list.append(cluster.number_Clustered)
+					list.append(cluster.number_tagged)
+					list.append(cluster.tree_species)
+					list.append(cluster.tree_ID)
+					list.append(cluster.height)
+					csv_data.append(list)
 			
 		t = loader.get_template('accounts/database.txt')
 		c = Context({
