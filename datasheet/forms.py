@@ -11,6 +11,14 @@ class ClusterForm(forms.ModelForm):
   class Meta:
     model = ClusterInfo
     exclude = ("basic",)
+  def __init__(self, *args, **kwargs):
+	super(ClusterForm, self).__init__(*args, **kwargs)
+	self.fields['tree_ID'].required = False
+  def clean_tree_ID(self):
+	data = self.cleaned_data['tree_ID']
+	if not data:
+		return "N/A"
+	return self.cleaned_data['tree_ID']
 
 class ExplorationForm(forms.ModelForm):
   class Meta:
