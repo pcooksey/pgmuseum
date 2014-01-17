@@ -155,12 +155,10 @@ def export(request):
 		# The data is hard-coded here, but you could load it from a database or
 		# some other source.
 		csv_data = [["Id","Date","Site Code","Site Name", "Number of Observers","Observers", "Exploration Start", "Exploration End", "Exploration Total", "Loners","Sunners","Fliers","Grounders","Dead","Mating","Total","Sky Percentage","BFT","Precip","Wind","Wind Direction", "Temperature","Count Start","Count End","Count Total","Water Source","Water Notes", "Nectar Source", "Nectar Notes", "Additional Notes",]]
-		#"Bush Purple", "Butterfiles Eating", "Bush Yellow","Butterfiles Eating","Chaste Tree","Butterfiles Eating","Daisy Tree","Butterfiles Eating","Mallow Pink","Butterfiles Eating","Mallow Purple", "Butterfiles Eating","Goldenrod","Butterfiles Eating","Yellow Daisy","Butterfiles Eating","Bottlebrush Red","Butterfiles Eating", "Number clustered", "Number Tagged", "Tree species", "Number of Trees", "Aspect", "Height"
+		
 		basic = Basic.objects.all()
-		clusters = ClusterInfo.objects.all() #.filter(basic = basic)
 		for data in basic:
 			list = []
-			print data.id
 			list.append(data.id)
 			list.append(data.date)
 			list.append(data.site_name.Code)
@@ -169,14 +167,14 @@ def export(request):
 			list.append(data.observers)
 			list.append(data.exploration_time.start)
 			list.append(data.exploration_time.end)
-			list.append(data.exploration_time.total)
+			list.append(data.exploration_time.exploration_total)
 			list.append(data.butterflies_observed.loners)
 			list.append(data.butterflies_observed.sunners)
 			list.append(data.butterflies_observed.fliers)
 			list.append(data.butterflies_observed.grounders)
 			list.append(data.butterflies_observed.dead)
 			list.append(data.butterflies_observed.mating)
-			list.append(data.butterflies_observed.total)
+			list.append(data.butterflies_observed.observed_total)
 			list.append(data.weather.skypercentage)
 			list.append(data.weather.BFT)
 			list.append(data.weather.precip)
@@ -185,28 +183,37 @@ def export(request):
 			list.append(data.weather.temp)
 			list.append(data.count_time.start)
 			list.append(data.count_time.end)
-			list.append(data.count_time.total)
+			list.append(data.count_time.count_total)
 			list.append(data.notes.waterSource)
 			list.append(data.notes.waterNotes)
 			list.append(data.notes.nectarSource)
 			list.append(data.notes.nectarNotes)
 			list.append(data.notes.additionalNotes)
+			csv_data.append(list)
+			
 			if data.site_name.Code == "PG":
+				list = ["","Flower","Eating"]
+				csv_data.append(list)
 				flowers = Flowers.objects.all().filter(basic = data)
 				for flower in flowers:
+					list = []
+					list.append("")
 					list.append(flower.flower)
-					list.append(flower.flower_bed)
 					list.append(flower.eating)
+					csv_data.append(list)
+				
+			list = ["","Number clustered", "Number Tagged", "Tree species", "Number of Trees", "Height"]
+			csv_data.append(list)
 			clusters = ClusterInfo.objects.all().filter(basic = data)
 			for cluster in clusters:
+				list = []
+				list.append("")
 				list.append(cluster.number_Clustered)
 				list.append(cluster.number_tagged)
 				list.append(cluster.tree_species)
 				list.append(cluster.tree_ID)
-				list.append(cluster.aspect)
 				list.append(cluster.height)
-			
-			csv_data.append(list)
+				csv_data.append(list)
 			
 		t = loader.get_template('accounts/database.txt')
 		c = Context({
