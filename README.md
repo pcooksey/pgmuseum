@@ -1,11 +1,11 @@
-This is a new database webserver for storing information on Monarch Butterflies for the Pacific Grove Museum. This project is written with Python and Django. <a href="http://south.aeracode.org/">South</a> is used for migration of databases.
+This is a database webserver for storing information on Monarch Butterflies for the Pacific Grove Museum. This project is written with Python and Django. <a href="http://south.aeracode.org/">South</a> is used for database migration.
 
 Process flow for project:
 <ol>
-<li>Make changes to Master branch and commit them</li>
-<li>For deployment, change to deploy branch and pull changes from master <code> git merge master </code></li>
-<li>Update heroku: <code> git push heroku deploy:master </code></li>
-<li>For changes to the model in master branch: </li>
+<li>Changes are made to the master branch (or testing branch), committed, and always merged back into master</li>
+<li>For deploying code change to deploy branch and merge changes from master <code> git merge master </code></li>
+<li>Next update heroku: <code> git push heroku deploy:master </code></li>
+<li>For <b> any changes </b> to the model be in the master branch (below are instructions for updating heroku's model): </li>
 <li> 
 <pre><code>python manage.py schemamigration some_app --auto
 git add .
@@ -27,10 +27,8 @@ For running website locally on computer:
 
 Extra commands for Heroku:
 <ol>
-<li> Resetting database <code> heroku pg:reset DATABASE </code>; however, it will destroy everything. </li>
 <li> Backing up database <code> heroku pgbackups:capture </code>;</li>
-<li> For local migrate file use this command then migrate it again. <code>python django_project/manage.py schemamigration some_app --auto </code> </li>
-<li> <code>heroku run python manage.py migrate app_name </code> </li>
+<li> Resetting database <code> heroku pg:reset DATABASE </code>; however, it will destroy everything. </li>
 </ol>
 
 Also, we're using <code>Python 2.7.3</code> and <code>Django 1.5</code>
