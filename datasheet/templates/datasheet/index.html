@@ -44,12 +44,12 @@
 				{% if ExplorationForm.start.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.start.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{ExplorationForm.start}}</td>
+				</br> <input type='time' id='{{ExplorationForm.start.auto_id}}' name='{{ExplorationForm.start.html_name}}' value='{{ExplorationForm.start.value}}'/></td>
 			<td>End: 
 				{% if ExplorationForm.end.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ExplorationForm.end.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{ExplorationForm.end}}</td>
+				</br> <input type='time' id='{{ExplorationForm.end.auto_id}}' name='{{ExplorationForm.end.html_name}}' value='{{ExplorationForm.end.value}}'/></td>
 		</tr>
 		<tr>
 			<td colspan="2">Total (min): 
@@ -144,12 +144,12 @@
 				{% if CountForm.count_start.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.count_start.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{CountForm.count_start}}</td>
+				</br> <input type='time' id='{{CountForm.count_start.auto_id}}' name='{{CountForm.count_start.html_name}}' value='{{CountForm.count_start.value}}'/></td>
 			<td>End: 
 				{% if CountForm.count_end.errors %}
 					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.count_end.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{CountForm.count_end}}</td>
+				</br> <input type='time' id='{{CountForm.count_end.auto_id}}' name='{{CountForm.count_end.html_name}}' value='{{CountForm.count_end.value}}'/></td>
 		</tr>
 		<tr>
 			<td colspan="2">Total (min):
