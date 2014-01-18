@@ -9,5 +9,6 @@ urlpatterns = patterns("",
   url(r"^home/export/$", views.export, name="export"),
   url(r"^home/data/$", views.extraInformation, name="data"),
   url(r"^home/delete/$", views.delete, name="delete"),
+  url(r"^home/select/$", views.select, name="select"),
   url(r"^home/graph/$", views.graph, name="graph"),
 )

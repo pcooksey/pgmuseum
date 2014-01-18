@@ -8,6 +8,7 @@ from accounts.models import AccessCode
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader, Context
 from datasheet.models import *
+from accounts.forms import *
 from django.db.models import Count
 
 def index(request):
@@ -155,9 +156,14 @@ def export(request):
 
 		# The data is hard-coded here, but you could load it from a database or
 		# some other source.
-		csv_data = [["Id","Date","Site Code","Site Name", "Number of Observers","Observers", "Exploration Start", "Exploration End", "Exploration Total", "Loners","Sunners","Fliers","Grounders","Dead","Mating","Total","Sky Percentage","BFT","Precip","Wind","Wind Direction", "Temperature","Count Start","Count End","Count Total","Water Source","Water Notes", "Nectar Source", "Nectar Notes", "Additional Notes",]]
+		csv_data = [["ID","Date","Site Code","Site Name", "Number of Observers","Observers", "Exploration Start", "Exploration End", "Exploration Total", "Loners","Sunners","Fliers","Grounders","Dead","Mating","Total","Sky Percentage","BFT","Precip","Wind","Wind Direction", "Temperature","Count Start","Count End","Count Total","Water Source","Water Notes", "Nectar Source", "Nectar Notes", "Additional Notes",]]
 		
-		basic = Basic.objects.all()
+		if request.method == 'POST':
+			sites = request.POST.getlist('sites')
+			basic = Basic.objects.filter(site_name__in=sites).order_by('site_name','-date')
+		else:
+			basic = Basic.objects.all().order_by('site_name','-date')
+			
 		for data in basic:
 			grandTotal = 0
 			list = []
@@ -242,6 +248,13 @@ def delete(request):
     return redirect("/accounts/home/")
   else:
     return redirect("/accounts/")
+
+def select(request):
+  if request.user.is_authenticated():
+	sites = SelectForm()
+	return render(request, "accounts/select.html", {"sites":sites})
+  else:
+	return redirect("/accounts/")
 	
 def graph(request):
   if request.user.is_authenticated():

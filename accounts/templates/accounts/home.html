@@ -15,7 +15,25 @@
 		  <input type="button" class="btn btn-primary" value="Admin Page" onclick="location.href='/admin/';">
 		  {% endif %}
 		  <button class="btn btn-primary" name="new" type="submit" >Add to Database</button>
-		  <input type="button" class="btn btn-primary" value="Export Database" onclick="location.href='export/';">
+		  <a href="#exporter" role="button" class="btn btn-primary" data-toggle="modal">Export Database</a>
+		  <!-- Modal -->
+			<div id="exporter" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">Select Site Names</h3>
+			  </div>
+			  <div class="modal-body">
+				<object data='select/' width="600" height="400"> 
+					<embed src=select width="600" height="400"> 
+					</embed> 
+					Error: Embedded data could not be displayed. 
+				</object>
+			  </div>
+			  <div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			  </div>
+			</div>
+		  <!-- End Modal -->
 		</form>
 		<div class="accordion" id="accordion2">
 		{% if basics %}
@@ -67,6 +85,7 @@
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 					  </div>
 					</div>
+					<!-- End Modal -->
 					</div>
 				</div>
 			</div>
@@ -104,6 +123,7 @@
 			{% for basic in basics %}
 				$('#basic{{basic.id}}').modal(options)
 			{% endfor %}
+			$('#exporter').modal(options)
 		});
 		</script>
 	  </div>
