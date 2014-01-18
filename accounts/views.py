@@ -258,12 +258,28 @@ def select(request):
 	
 def graph(request):
   if request.user.is_authenticated():
-	#graph = [["Site Name", "Population"]]
-	#basics = Basic.objects.filter(date__range=["2013-12-01", "2013-12-31"]).annotate(grandtotal=
-	#for basic in basics:
-	#	total = 0
-	#	site = basic.site_name
+	graph = [['Site Name', 'Population']]
+	#basics = Basic.objects.filter(date__range=["2013-12-01", "2013-12-31"]).order_by('site_name')
+	basics = Basic.objects.all().order_by('site_name')
+	list = []
+	for basic in basics:
+		site = str(basic.site_name.site_name)
+		if not list:
+			list.append(site)
+			list.append(0)
+		else:
+			if list[0] != site:
+				graph.append(list)
+				list = []
+				list.append(site)
+				list.append(0)
 		
-	return render(request, "accounts/graph.html", {"basics": basic})
+		list[1] += basic.butterflies_observed.observed_total
+		clusters = ClusterInfo.objects.all().filter(basic = basic)	
+		if clusters:
+			for cluster in clusters:
+				list[1] += cluster.number_Clustered
+	graph.append(list)
+	return render(request, "accounts/graph.html", {"graph": graph})
   else:
 	return redirect("/accounts/")

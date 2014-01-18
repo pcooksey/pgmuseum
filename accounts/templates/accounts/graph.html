@@ -5,17 +5,11 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Site Name', 'Population'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+        var data = google.visualization.arrayToDataTable({{graph|safe}});
 
         var options = {
-          title: 'December Population Count',
-          hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+          title: 'Total Population Count Observed',
+          hAxis: {title: 'Site Name', titleTextStyle: {color: 'red'}}
         };
 
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
