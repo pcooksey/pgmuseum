@@ -1,2 +1,4 @@
-{% for row in data %}{% for data in row %}{{ data|addslashes }},{% endfor %}
+{% autoescape off %}
+{% for row in data %}{% for data in row %}{{ data }},{% endfor %}
 {% endfor %}
+{% endautoescape %}
