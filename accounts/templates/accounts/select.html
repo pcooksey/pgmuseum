@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  {% load staticfiles %}
+  <head>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#unchecker').click(function () {
+				$("input[name=sites]").removeAttr('checked');
+			});
+		});
+	</script>
+  </head>
+  <body style='background: #F8FBF4;'>
+		{% if sites %}
+			<form name="siteSelect" action="../export/" method="post">
+			{% csrf_token %}
+			{{ sites.as_table }}
+			<input type="submit" value="Submit" />
+			<input type="button" value="Uncheck All" id="unchecker" />
+			</form>
+		{% endif %}
+  </body>
+</html>
