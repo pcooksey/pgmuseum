@@ -159,13 +159,14 @@ def export(request):
 		
 		basic = Basic.objects.all()
 		for data in basic:
+			grandTotal = 0
 			list = []
 			list.append(data.id)
 			list.append(data.date)
 			list.append(data.site_name.Code)
 			list.append(data.site_name)
 			list.append(data.number_of_observers)
-			list.append("\""+data.observers+"\"")
+			list.append(data.observers)
 			list.append(data.exploration_time.start)
 			list.append(data.exploration_time.end)
 			list.append(data.exploration_time.exploration_total)
@@ -186,11 +187,12 @@ def export(request):
 			list.append(data.count_time.end)
 			list.append(data.count_time.count_total)
 			list.append(data.notes.waterSource)
-			list.append("\""+data.notes.waterNotes+"\"")
+			list.append(data.notes.waterNotes)
 			list.append(data.notes.nectarSource)
-			list.append("\""+data.notes.nectarNotes+"\"")
-			list.append("\""+data.notes.additionalNotes+"\"")
+			list.append(data.notes.nectarNotes)
+			list.append(data.notes.additionalNotes)
 			csv_data.append(list)
+			grandTotal += data.butterflies_observed.observed_total
 			
 			flowers = Flowers.objects.all().filter(basic = data)
 			if data.site_name.Code == "PG" and flowers:
@@ -205,7 +207,7 @@ def export(request):
 			
 			clusters = ClusterInfo.objects.all().filter(basic = data)	
 			if clusters:
-				list = ["","Number clustered", "Number Tagged", "Tree species", "Number of Trees", "Height"]
+				list = ["","Number Clustered", "Number Tagged", "Tree Species", "Number of Trees", "Height"]
 				csv_data.append(list)
 				for cluster in clusters:
 					list = []
@@ -215,7 +217,12 @@ def export(request):
 					list.append(cluster.tree_ID)
 					list.append(cluster.height)
 					csv_data.append(list)
-			
+					grandTotal += cluster.number_Clustered
+			else:
+				list = ["","No Clusters Observed"]
+				csv_data.append(list)
+			list = ["", "Total Butterflies", grandTotal]
+			csv_data.append(list)
 		t = loader.get_template('accounts/database.txt')
 		c = Context({
 			'data': csv_data,
