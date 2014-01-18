@@ -141,15 +141,15 @@
         <thead><tr><th><h5>Count Time:</h5></th></tr></thead>
 		<tr>
 			<td>Start: 
-				{% if CountForm.start.errors %}
-					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.start.errors.as_text}}'>Error</a> 
+				{% if CountForm.count_start.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.count_start.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{CountForm.start}}</td>
+				</br> {{CountForm.count_start}}</td>
 			<td>End: 
-				{% if CountForm.end.errors %}
-					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.end.errors.as_text}}'>Error</a> 
+				{% if CountForm.count_end.errors %}
+					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{CountForm.count_end.errors.as_text}}'>Error</a> 
 				{% endif %}
-				</br> {{CountForm.end}}</td>
+				</br> {{CountForm.count_end}}</td>
 		</tr>
 		<tr>
 			<td colspan="2">Total (min):

@@ -27,8 +27,8 @@ class ExplorationTime(models.Model):
   exploration_total = models.IntegerField()
   
 class CountTime(models.Model):
-  start = models.TimeField()
-  end = models.TimeField()
+  count_start = models.TimeField(null=True)
+  count_end = models.TimeField(null=True)
   count_total = models.IntegerField()
   
 class Observed(models.Model):
