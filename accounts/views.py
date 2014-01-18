@@ -258,7 +258,12 @@ def select(request):
 	
 def graph(request):
   if request.user.is_authenticated():
-	basic = Basic.objects.values('site_name').annotate(count = Count('site_name'))
+	#graph = [["Site Name", "Population"]]
+	#basics = Basic.objects.filter(date__range=["2013-12-01", "2013-12-31"]).annotate(grandtotal=
+	#for basic in basics:
+	#	total = 0
+	#	site = basic.site_name
+		
 	return render(request, "accounts/graph.html", {"basics": basic})
   else:
 	return redirect("/accounts/")
