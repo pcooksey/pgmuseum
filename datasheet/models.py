@@ -62,12 +62,17 @@ class Weather(models.Model):
 	('51-75%','51-75%'),
 	('76-100%','76-100%'),
   )
+  WIND_DIRECTION = (
+	('N','N'),('NE','NE'),('E','E'),('SE','SE'),
+	('S','S'),('SW','SW'),('W','W'),('NW','NW'),
+	('none','none'),
+  )
   
   skypercentage = models.CharField(max_length=10,choices=PRECENTAGE, default='0-25%')
   BFT = models.IntegerField(max_length=1,choices=Beaufort_Scale_For_Sky, default=0)
   precip = models.CharField(max_length=10,choices=PRECIP, default='none')
   wind = models.DecimalField(max_digits=5, decimal_places=2)
-  winddirection = models.CharField(max_length=20)
+  winddirection = models.CharField(max_length=20, choices=WIND_DIRECTION, default='none')
   temp = models.DecimalField(max_digits=5, decimal_places=2)
   
 class Note(models.Model):
@@ -106,7 +111,6 @@ class ClusterInfo(models.Model):
   id = models.AutoField(primary_key = True)
   basic = models.ForeignKey(Basic)
   number_Clustered = models.IntegerField()
-  number_tagged = models.IntegerField()
   tree_species = models.ForeignKey(TreeSpecie)
   tree_ID = models.CharField(max_length=20)
   height = models.DecimalField(max_digits=5, decimal_places=2)

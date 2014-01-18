@@ -19,13 +19,6 @@
 				{% endif %}
 				</td>
 			</tr>
-			<tr><td>Tagged in Cluster:</td>
-				<td> {{ClusterForm.number_tagged}}
-				{% if ClusterForm.number_tagged.errors %}
-					<a href='#' data-toggle='tooltip' data-placement='right' title data-original-title='{{ClusterForm.number_tagged.errors.as_text}}'>Error</a> 
-				{% endif %}
-				</td>
-			</tr>
 			<tr><td>Tree Species:</td>
 				<td> {{ClusterForm.tree_species}}
 				{% if ClusterForm.tree_species.errors %}
@@ -58,7 +51,6 @@
       <thead>
         <tr>
           <th>Monarch Clustered</th>
-          <th>Tagged in Cluster</th>
 		  <th>Tree ID</th>
 		  <th>Tree Species </th>
 		  <th>Cluster Height (meters)</th>
@@ -68,7 +60,6 @@
         {% for item in clusters %}
           <tr>
             <td>{{ item.number_Clustered }}</td>
-            <td>{{ item.number_tagged }}</td>
 			<td>{{ item.tree_ID }}</td>
             <td>{{ item.tree_species }}</td>
 			<td>{{ item.height }}m</td>
